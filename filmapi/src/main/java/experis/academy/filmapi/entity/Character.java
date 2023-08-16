@@ -1,9 +1,8 @@
 package experis.academy.filmapi.entity;
 
-import org.springframework.context.annotation.Primary;
+import java.util.Set;
 
 import experis.academy.filmapi.type.Gender;
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,8 +10,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "character")
 public class Character {
 
     @Id
@@ -31,6 +33,9 @@ public class Character {
 
     @Column(name = "picture_url", length = 200, nullable = false)
     private String pictureURL;
+
+    @ManyToMany(mappedBy = "characters")
+    private Set<Movie> movies;
 
     public Character(int id, String name, String alias, Gender gender, String pictureURL) {
         this.id = id;
