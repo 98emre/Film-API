@@ -7,8 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,8 +25,7 @@ public class Franchise {
     @Column(length = 500, nullable = false)
     private String description;
 
-    @OneToMany
-    @JoinColumn(name = "movie_id")
+    @OneToMany(mappedBy = "franchise")
     private Set<Movie> movie;
 
     public Franchise(int id, String name, String description) {

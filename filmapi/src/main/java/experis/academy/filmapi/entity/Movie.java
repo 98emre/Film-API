@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -47,7 +47,7 @@ public class Movie {
 
     private Set<Character> characters;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
