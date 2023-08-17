@@ -36,16 +36,15 @@ public class FranchiseController {
         return ResponseEntity.ok((List<Franchise>) franchiseService.findAll());
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Franchise> getById(@PathVariable int id) {
         return ResponseEntity.ok(franchiseService.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Franchise> add(@RequestBody Franchise franchise) {
-        Franchise franchiseResponse = franchiseService.add(franchise);
-        URI location = URI.create("franchises/" + franchiseResponse.getId());
-        return ResponseEntity.created(location).build();
+       return ResponseEntity.ok(franchiseService.add(franchise));
+     
     }
 
 
