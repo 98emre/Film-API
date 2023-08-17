@@ -51,8 +51,12 @@ public class Movie {
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
+    public Movie() {
+
+    }
+
     public Movie(int id, String title, String genre, int releaseYear, String director, String posterPictureURL,
-            String trailerLink) {
+            String trailerLink, Set<Character> characters, Franchise franchise) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -60,6 +64,8 @@ public class Movie {
         this.director = director;
         this.posterPictureURL = posterPictureURL;
         this.trailerLink = trailerLink;
+        this.characters = characters;
+        this.franchise = franchise;
     }
 
     public int getId() {
@@ -117,4 +123,21 @@ public class Movie {
     public void setTrailerLink(String trailerLink) {
         this.trailerLink = trailerLink;
     }
+
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
+    }
+
+    public Franchise getFranchise() {
+        return franchise;
+    }
+
+    public void setFranchise(Franchise franchise) {
+        this.franchise = franchise;
+    }
+
 }
