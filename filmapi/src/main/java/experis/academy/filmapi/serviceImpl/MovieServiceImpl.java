@@ -21,31 +21,26 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return movieRepository.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Movie> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return movieRepository.findAll();
     }
 
     @Override
     public Movie add(Movie entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        return movieRepository.save(entity);
     }
 
     @Override
     public Movie update(Movie entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return movieRepository.save(entity);
     }
 
     @Override
     public void deleteById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        movieRepository.deleteById(id);
     }
 }
