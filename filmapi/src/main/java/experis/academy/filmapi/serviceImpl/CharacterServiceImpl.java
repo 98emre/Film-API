@@ -1,13 +1,16 @@
 package experis.academy.filmapi.serviceImpl;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.service.CharacterService;
-import experis.academy.filmapi.entity.Character;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -21,32 +24,28 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return characterRepository.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Character> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return characterRepository.findAll().stream().sorted(Comparator.comparingInt(Character::getId))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Character add(Character entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        return characterRepository.save(entity);
     }
 
     @Override
     public Character update(Character entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return characterRepository.save(entity);
     }
 
     @Override
     public void deleteById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        characterRepository.deleteById(id);
     }
 
 }

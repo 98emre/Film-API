@@ -1,4 +1,4 @@
-package experis.academy.filmapi.entity;
+package experis.academy.filmapi.model;
 
 import java.util.Set;
 
@@ -36,6 +36,9 @@ public class Character {
 
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
+
+    public Character() {
+    }
 
     public Character(int id, String name, String alias, Gender gender, String pictureURL) {
         this.id = id;

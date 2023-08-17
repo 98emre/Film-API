@@ -1,4 +1,4 @@
-package experis.academy.filmapi.entity;
+package experis.academy.filmapi.model;
 
 import java.util.Set;
 

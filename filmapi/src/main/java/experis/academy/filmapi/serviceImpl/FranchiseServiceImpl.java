@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import experis.academy.filmapi.entity.Franchise;
+import experis.academy.filmapi.model.Franchise;
 import experis.academy.filmapi.repository.FranchiseRepository;
 import experis.academy.filmapi.service.FranchiseService;
 
