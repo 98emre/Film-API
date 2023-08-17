@@ -7,4 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/characters") // gör om
 public class CharacterController {
 
+
+    
 }
