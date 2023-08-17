@@ -2,7 +2,6 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
-import experis.academy.filmapi.type.Gender;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

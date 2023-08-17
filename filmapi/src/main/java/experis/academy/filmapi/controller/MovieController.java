@@ -50,19 +50,19 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
-        return ResponseEntity.ok(characterService.add(character));
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+        return ResponseEntity.ok(movieService.add(movie));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Character> updateCharacter(@PathVariable Integer id, @RequestBody Character character) {
-        character.setId(id);
-        return ResponseEntity.ok(characterService.update(character));
+    public ResponseEntity<Movie> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
+        movie.setId(id);
+        return ResponseEntity.ok(movieService.update(movie));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCharacter(@PathVariable Integer id) {
-        characterService.deleteById(id);
+    public void deleteMovie(@PathVariable Integer id) {
+        movieService.deleteById(id);
     }
 
 }
