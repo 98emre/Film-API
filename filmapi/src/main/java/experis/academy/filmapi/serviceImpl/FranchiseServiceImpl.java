@@ -21,32 +21,27 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise findById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return franchiseRepository.findById(id).orElse(null);
     }
 
     @Override
     public Collection<Franchise> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        return franchiseRepository.findAll();
     }
 
     @Override
     public Franchise add(Franchise entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        return franchiseRepository.save(entity);
     }
 
     @Override
     public Franchise update(Franchise entity) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return franchiseRepository.save(entity);
     }
 
     @Override
     public void deleteById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        franchiseRepository.deleteById(id);
     }
 
 }

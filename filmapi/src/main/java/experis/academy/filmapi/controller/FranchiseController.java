@@ -2,6 +2,7 @@ package experis.academy.filmapi.controller;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import experis.academy.filmapi.entity.Franchise;
 
 @RestController
-@RequestMapping(path = "/franchises")
+@RequestMapping(path = "api/franchises")
 public class FranchiseController {
 
     private final FranchiseService franchiseService;
@@ -31,8 +32,8 @@ public class FranchiseController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Franchise>> getAll() {
-        return ResponseEntity.ok(franchiseService.findAll());
+    public ResponseEntity<List<Franchise>> getAll() {
+        return ResponseEntity.ok((List<Franchise>) franchiseService.findAll());
     }
 
     @GetMapping("{id}")
