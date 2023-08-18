@@ -25,7 +25,7 @@ public class Franchise {
     @Column(length = 500, nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "franchise", orphanRemoval = true)
+    @OneToMany(mappedBy = "franchise")
     private Set<Movie> movies;
 
     public Franchise() {
