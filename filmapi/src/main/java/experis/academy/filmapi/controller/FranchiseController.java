@@ -43,8 +43,15 @@ public class FranchiseController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Franchise> updateFranchise(@PathVariable Integer id, @RequestBody Franchise franchise) {
-        franchise.setId(id);
-        return ResponseEntity.ok(franchiseService.update(franchise));
+        if (franchiseService.findById(id) == null) {
+            return null;
+        }
+
+        Franchise updatedFranchise = franchiseService.findById(id);
+        updatedFranchise.setDescription(franchise.getDescription());
+        updatedFranchise.setName(franchise.getName());
+
+        return ResponseEntity.ok(franchiseService.update(updatedFranchise));
     }
 
     @DeleteMapping("/delete/{id}")
