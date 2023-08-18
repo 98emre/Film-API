@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,10 +57,19 @@ public class CharacterController {
         return ResponseEntity.ok(characterService.add(character));
     }
 
-    @PutMapping("/update/{id}")
+    @PatchMapping("/update/{id}")
     public ResponseEntity<Character> updateCharacter(@PathVariable Integer id, @RequestBody Character character) {
-        character.setId(id);
-        return ResponseEntity.ok(characterService.update(character));
+        if (characterService.findById(id) == null) {
+            return null;
+        }
+
+        Character updatedCharacter = characterService.findById(id);
+        updatedCharacter.setName(character.getName());
+        updatedCharacter.setAlias(character.getAlias());
+        updatedCharacter.setGender(character.getGender());
+        updatedCharacter.setPictureURL(character.getPictureURL());
+
+        return ResponseEntity.ok(characterService.update(updatedCharacter));
     }
 
     @DeleteMapping("/delete/{id}")
