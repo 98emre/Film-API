@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import experis.academy.filmapi.model.MovieCharacter;
-import experis.academy.filmapi.service.MovieCharacterService;
+import experis.academy.filmapi.model.Character;
+import experis.academy.filmapi.service.CharacterService;
 
 @RestController
 @RequestMapping(path = "api/characters")
-public class MovieCharacterController {
+public class CharacterController {
 
-    private final MovieCharacterService characterService;
+    private final CharacterService characterService;
 
     @Autowired
-    public MovieCharacterController(MovieCharacterService characterService) {
+    public CharacterController(CharacterService characterService) {
         this.characterService = characterService;
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieCharacter>> getAll() {
+    public ResponseEntity<List<Character>> getAll() {
         try {
-            return ResponseEntity.ok((List<MovieCharacter>) characterService.findAll());
+            return ResponseEntity.ok((List<Character>) characterService.findAll());
         } catch (Exception e) {
             System.out.println("Error: " + e);
             return null;
@@ -42,7 +42,7 @@ public class MovieCharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieCharacter> getCharacter(@PathVariable Integer id) {
+    public ResponseEntity<Character> getCharacter(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok(characterService.findById(id));
         } catch (Exception e) {
@@ -53,18 +53,18 @@ public class MovieCharacterController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<MovieCharacter> addCharacter(@RequestBody MovieCharacter character) {
+    public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         return ResponseEntity.ok(characterService.add(character));
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id,
-            @RequestBody MovieCharacter character) {
+    public ResponseEntity<Character> updateCharacter(@PathVariable Integer id,
+            @RequestBody Character character) {
         if (characterService.findById(id) == null) {
             return null;
         }
 
-        MovieCharacter updatedCharacter = characterService.findById(id);
+        Character updatedCharacter = characterService.findById(id);
         updatedCharacter.setName(character.getName());
         updatedCharacter.setAlias(character.getAlias());
         updatedCharacter.setGender(character.getGender());

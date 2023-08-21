@@ -14,7 +14,7 @@ public class MovieDto {
     private String director;
     private String posterPictureURL;
     private String trailerLink;
-    private Set<MovieCharacterDto> characters;
+    private Set<CharacterDto> characters;
 
     private FranchiseDto franchise;
     private int franchiseId;
@@ -23,7 +23,7 @@ public class MovieDto {
     }
 
     public MovieDto(int id, String title, String genre, int releaseYear, String director, String posterPictureURL,
-            String trailerLink, Set<MovieCharacterDto> characters, FranchiseDto franchise) {
+            String trailerLink, Set<CharacterDto> characters, FranchiseDto franchise) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -91,11 +91,11 @@ public class MovieDto {
         this.trailerLink = trailerLink;
     }
 
-    public Set<MovieCharacterDto> getCharacters() {
+    public Set<CharacterDto> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(Set<MovieCharacterDto> characters) {
+    public void setCharacters(Set<CharacterDto> characters) {
         this.characters = characters;
     }
 

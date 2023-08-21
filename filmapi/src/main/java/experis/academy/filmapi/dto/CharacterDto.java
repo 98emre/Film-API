@@ -4,7 +4,7 @@ import java.util.Set;
 
 import experis.academy.filmapi.model.Gender;
 
-public class MovieCharacterDto {
+public class CharacterDto {
     private int id;
     private String name;
     private String alias;
@@ -12,7 +12,7 @@ public class MovieCharacterDto {
     private String pictureURL;
     private Set<MovieDto> movies;
 
-    public MovieCharacterDto(int id, String name, String alias, Gender gender, String pictureURL,
+    public CharacterDto(int id, String name, String alias, Gender gender, String pictureURL,
             Set<MovieDto> movies) {
         this.id = id;
         this.name = name;
