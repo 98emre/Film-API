@@ -36,6 +36,16 @@ public class FranchiseController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Franchise> findById(@PathVariable int id) {
+        try {
+            return ResponseEntity.ok(franchiseService.findById(id));
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return null;
+        }
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
         return ResponseEntity.ok(franchiseService.add(franchise));

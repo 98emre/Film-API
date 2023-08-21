@@ -21,7 +21,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(Integer id) {
-        return movieRepository.findById(id).orElse(null);
+        Movie movie = movieRepository.findById(id).orElse(null);
+        if (movie.getId() < 0) {
+            return null;
+        }
+        return movie;
     }
 
     @Override
