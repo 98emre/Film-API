@@ -28,16 +28,16 @@ public class Movie {
     @Column(name = "genre", length = 100, nullable = false)
     private String genre;
 
-    @Column(name = "release_year", nullable = false)
+    @Column(name = "release_year", length = 10, nullable = false)
     private int releaseYear;
 
     @Column(length = 50, nullable = false)
     private String director;
 
-    @Column(name = "picture_url", length = 200, nullable = false)
+    @Column(name = "picture_url", length = 200, nullable = true)
     private String posterPictureURL;
 
-    @Column(name = "trailer_link", length = 200, nullable = false)
+    @Column(name = "trailer_link", length = 200, nullable = true)
     private String trailerLink;
 
     @ManyToMany
@@ -48,7 +48,7 @@ public class Movie {
     private Set<Character> characters;
 
     @ManyToOne
-    @JoinColumn(name = "franchise_id")
+    @JoinColumn(name = "franchise_id", nullable = true)
     private Franchise franchise;
 
     public Movie() {
