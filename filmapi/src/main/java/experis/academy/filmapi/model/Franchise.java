@@ -2,6 +2,9 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +29,7 @@ public class Franchise {
     private String description;
 
     @OneToMany(mappedBy = "franchise")
+    @JsonIgnore
     private Set<Movie> movies;
 
     public Franchise() {

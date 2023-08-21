@@ -2,6 +2,9 @@ package experis.academy.filmapi.dto;
 
 import java.util.Set;
 
+import lombok.Data;
+
+@Data
 public class MovieDto {
 
     private int id;
@@ -11,11 +14,16 @@ public class MovieDto {
     private String director;
     private String posterPictureURL;
     private String trailerLink;
-    private Set<CharacterDto> characters;
+    private Set<MovieCharacterDto> characters;
+
     private FranchiseDto franchise;
+    private int franchiseId;
+
+    public MovieDto() {
+    }
 
     public MovieDto(int id, String title, String genre, int releaseYear, String director, String posterPictureURL,
-            String trailerLink, Set<CharacterDto> characters, FranchiseDto franchise) {
+            String trailerLink, Set<MovieCharacterDto> characters, FranchiseDto franchise) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -83,11 +91,11 @@ public class MovieDto {
         this.trailerLink = trailerLink;
     }
 
-    public Set<CharacterDto> getCharacters() {
+    public Set<MovieCharacterDto> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(Set<CharacterDto> characters) {
+    public void setCharacters(Set<MovieCharacterDto> characters) {
         this.characters = characters;
     }
 
@@ -97,6 +105,14 @@ public class MovieDto {
 
     public void setFranchise(FranchiseDto franchise) {
         this.franchise = franchise;
+    }
+
+    public int getFranchiseId() {
+        return franchiseId;
+    }
+
+    public void setFranchiseId(int franchiseId) {
+        this.franchiseId = franchiseId;
     }
 
 }

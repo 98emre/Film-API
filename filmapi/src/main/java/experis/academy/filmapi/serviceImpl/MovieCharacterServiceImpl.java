@@ -9,16 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import experis.academy.filmapi.model.MovieCharacter;
-import experis.academy.filmapi.repository.CharacterRepository;
-import experis.academy.filmapi.service.CharacterService;
+import experis.academy.filmapi.repository.MovieCharacterRepository;
+import experis.academy.filmapi.service.MovieCharacterService;
 
 @Service
-public class CharacterServiceImpl implements CharacterService {
+public class MovieCharacterServiceImpl implements MovieCharacterService {
 
-    private final CharacterRepository characterRepository;
+    private final MovieCharacterRepository characterRepository;
 
     @Autowired
-    public CharacterServiceImpl(CharacterRepository characterRepository) {
+    public MovieCharacterServiceImpl(MovieCharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
     }
 

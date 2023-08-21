@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import experis.academy.filmapi.model.MovieCharacter;
-import experis.academy.filmapi.service.CharacterService;
+import experis.academy.filmapi.service.MovieCharacterService;
 
 @RestController
 @RequestMapping(path = "api/characters")
 public class MovieCharacterController {
 
-    private final CharacterService characterService;
+    private final MovieCharacterService characterService;
 
     @Autowired
-    public MovieCharacterController(CharacterService characterService) {
+    public MovieCharacterController(MovieCharacterService characterService) {
         this.characterService = characterService;
     }
 
@@ -58,7 +58,8 @@ public class MovieCharacterController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id, @RequestBody MovieCharacter character) {
+    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id,
+            @RequestBody MovieCharacter character) {
         if (characterService.findById(id) == null) {
             return null;
         }

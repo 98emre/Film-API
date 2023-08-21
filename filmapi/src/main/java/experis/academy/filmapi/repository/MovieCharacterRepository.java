@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import experis.academy.filmapi.model.MovieCharacter;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<MovieCharacter, Integer> {
+public interface MovieCharacterRepository extends JpaRepository<MovieCharacter, Integer> {
 
 }

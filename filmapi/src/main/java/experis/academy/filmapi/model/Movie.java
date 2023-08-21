@@ -2,6 +2,8 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,7 +47,7 @@ public class Movie {
             @JoinColumn(name = "character_id")
     })
 
-    private Set<Character> characters;
+    private Set<MovieCharacter> characters;
 
     @ManyToOne
     @JoinColumn(name = "franchise_id")
@@ -56,7 +58,7 @@ public class Movie {
     }
 
     public Movie(int id, String title, String genre, int releaseYear, String director, String posterPictureURL,
-            String trailerLink, Set<Character> characters, Franchise franchise) {
+            String trailerLink, Set<MovieCharacter> characters, Franchise franchise) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -124,11 +126,11 @@ public class Movie {
         this.trailerLink = trailerLink;
     }
 
-    public Set<Character> getCharacters() {
+    public Set<MovieCharacter> getCharacters() {
         return characters;
     }
 
-    public void setCharacters(Set<Character> characters) {
+    public void setCharacters(Set<MovieCharacter> characters) {
         this.characters = characters;
     }
 
