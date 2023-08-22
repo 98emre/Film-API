@@ -12,9 +12,7 @@ public interface MovieMapper {
 
     MovieMapper INSTANCE = Mappers.getMapper(MovieMapper.class);
 
-    @Mapping(source = "franchise.id", target = "franchiseId")
     MovieDto toMovieDto(Movie movie);
 
-    @Mapping(source = "franchiseId", target = "franchise.id")
     Movie toMovie(MovieDto movieDto);
 }
