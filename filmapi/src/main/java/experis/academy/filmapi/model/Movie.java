@@ -35,11 +35,11 @@ public class Movie {
     @Column(name = "trailer_link", length = 200)
     private String trailerLink;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "movie_character", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
             @JoinColumn(name = "character_id") })
     private Set<Character> characters;

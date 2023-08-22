@@ -33,7 +33,7 @@ public class Character {
     @Column(name = "picture_url", length = 200)
     private String pictureURL;
 
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "characters", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JsonIgnore
     private Set<Movie> movies;
 }
