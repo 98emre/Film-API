@@ -22,7 +22,7 @@ public class Franchise {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String description;
 
     @OneToMany(mappedBy = "franchise")

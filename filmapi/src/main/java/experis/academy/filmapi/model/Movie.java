@@ -2,6 +2,7 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,30 +26,30 @@ public class Movie {
     @Column(name = "title", length = 50, nullable = false)
     private String title;
 
-    @Column(name = "genre", length = 100, nullable = false)
+    @Column(name = "genre", length = 100)
     private String genre;
 
-    @Column(name = "release_year", length = 10, nullable = false)
+    @Column(name = "release_year", nullable = false)
     private int releaseYear;
 
     @Column(length = 50, nullable = false)
     private String director;
 
-    @Column(name = "picture_url", length = 200, nullable = true)
+    @Column(name = "picture_url", length = 200)
     private String posterPictureURL;
 
-    @Column(name = "trailer_link", length = 200, nullable = true)
+    @Column(name = "trailer_link", length = 200)
     private String trailerLink;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "movie_character", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
             @JoinColumn(name = "character_id")
     })
 
     private Set<Character> characters;
 
-    @ManyToOne
-    @JoinColumn(name = "franchise_id", nullable = true)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
     public Movie() {

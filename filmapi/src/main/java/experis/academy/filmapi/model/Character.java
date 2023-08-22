@@ -24,13 +24,13 @@ public class Character {
     @Column(name = "character_name", length = 50, nullable = false)
     private String name;
 
-    @Column(name = "alias", length = 50, nullable = true)
+    @Column(name = "alias", length = 50)
     private String alias;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "picture_url", length = 200, nullable = false)
+    @Column(name = "picture_url", length = 200)
     private String pictureURL;
 
     @ManyToMany(mappedBy = "characters")
