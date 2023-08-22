@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import experis.academy.filmapi.mappers.MovieMapper;
 import experis.academy.filmapi.model.Movie;
 import experis.academy.filmapi.service.MovieService;
 
@@ -22,12 +21,10 @@ import experis.academy.filmapi.service.MovieService;
 public class MovieController {
 
     private final MovieService movieService;
-    private final MovieMapper movieMapper;
 
     @Autowired
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    public MovieController(MovieService movieService) {
         this.movieService = movieService;
-        this.movieMapper = movieMapper;
     }
 
     @GetMapping
