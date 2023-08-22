@@ -1,21 +1,13 @@
 package experis.academy.filmapi.controller;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.model.MovieCharacter;
+import experis.academy.filmapi.model.dto.CharacterDto;
 import experis.academy.filmapi.service.CharacterService;
 
 @RestController
@@ -30,50 +22,55 @@ public class CharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieCharacter>> getAll() {
+    public ResponseEntity<List<CharacterDto>> getAll() {
         try {
-            return ResponseEntity.ok((List<MovieCharacter>) characterService.findAll());
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-            return null;
+            List<CharacterDto> characters = characterService.findAll().stream().collect(Collectors.toList());
+            return ResponseEntity.ok(characters);
         }
 
+        catch (Exception e) {
+            System.out.println("Error: " + e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieCharacter> getCharacter(@PathVariable Integer id) {
+    public ResponseEntity<CharacterDto> getCharacter(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(characterService.findById(id));
-        } catch (Exception e) {
-            // TODO: handle exception
+            CharacterDto character = characterService.findById(id);
+            if (character == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok(character);
+        }
+
+        catch (Exception e) {
             System.out.println("Error " + e);
-            return null;
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
     @PostMapping("/add")
-    public ResponseEntity<MovieCharacter> addCharacter(@RequestBody MovieCharacter character) {
-        return ResponseEntity.ok(characterService.add(character));
+    public ResponseEntity<CharacterDto> addCharacter(@RequestBody CharacterDto characterDto) {
+        return ResponseEntity.ok(characterService.add(characterDto));
     }
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id, @RequestBody MovieCharacter character) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CharacterDto> updateCharacter(@PathVariable Integer id,
+            @RequestBody CharacterDto characterDto) {
+
         if (characterService.findById(id) == null) {
-            return null;
+            return ResponseEntity.notFound().build();
         }
 
-        MovieCharacter updatedCharacter = characterService.findById(id);
-        updatedCharacter.setName(character.getName());
-        updatedCharacter.setAlias(character.getAlias());
-        updatedCharacter.setGender(character.getGender());
-        updatedCharacter.setPictureURL(character.getPictureURL());
-
-        return ResponseEntity.ok(characterService.update(updatedCharacter));
+        characterDto.setId(id);
+        return ResponseEntity.ok(characterService.update(characterDto));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCharacter(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
         characterService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
