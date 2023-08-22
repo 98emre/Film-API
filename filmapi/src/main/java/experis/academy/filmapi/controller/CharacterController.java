@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import experis.academy.filmapi.model.Character;
+import experis.academy.filmapi.model.MovieCharacter;
 import experis.academy.filmapi.service.CharacterService;
 
 @RestController
@@ -30,9 +30,9 @@ public class CharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Character>> getAll() {
+    public ResponseEntity<List<MovieCharacter>> getAll() {
         try {
-            return ResponseEntity.ok((List<Character>) characterService.findAll());
+            return ResponseEntity.ok((List<MovieCharacter>) characterService.findAll());
         } catch (Exception e) {
             System.out.println("Error: " + e);
             return null;
@@ -41,7 +41,7 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharacter(@PathVariable Integer id) {
+    public ResponseEntity<MovieCharacter> getCharacter(@PathVariable Integer id) {
         try {
             return ResponseEntity.ok(characterService.findById(id));
         } catch (Exception e) {
@@ -52,17 +52,17 @@ public class CharacterController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
+    public ResponseEntity<MovieCharacter> addCharacter(@RequestBody MovieCharacter character) {
         return ResponseEntity.ok(characterService.add(character));
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<Character> updateCharacter(@PathVariable Integer id, @RequestBody Character character) {
+    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id, @RequestBody MovieCharacter character) {
         if (characterService.findById(id) == null) {
             return null;
         }
 
-        Character updatedCharacter = characterService.findById(id);
+        MovieCharacter updatedCharacter = characterService.findById(id);
         updatedCharacter.setName(character.getName());
         updatedCharacter.setAlias(character.getAlias());
         updatedCharacter.setGender(character.getGender());

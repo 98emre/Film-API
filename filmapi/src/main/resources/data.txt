@@ -1,5 +1,5 @@
 -- Movies
-INSERT INTO movie (release_year, director, title, genre, picture_url, trailer_link, franchise_id) 
+INSERT INTO movie (release_year, director, title, genre, picture_url, trailer_link,franchise_id) 
 VALUES (1989, 'Tim Burton', 'Batman', 'Action,Superhero,Criminal,Adventure,Drama,Mystery', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Batman_%281989%29_theatrical_poster.jpg/220px-Batman_%281989%29_theatrical_poster.jpg', 'https://www.youtube.com/watch?v=BHUVctLdw38', NULL); -- 1
 INSERT INTO movie (release_year, director, title, genre, picture_url, trailer_link, franchise_id) 
 VALUES (1992, 'Tim Burton', 'Batman Returns', 'Action,Superhero,Criminal,Adventure,Thriller', 'https://upload.wikimedia.org/wikipedia/en/thumb/8/83/Batman_returns_poster2.jpg/220px-Batman_returns_poster2.jpg', NULL, NULL); -- 2

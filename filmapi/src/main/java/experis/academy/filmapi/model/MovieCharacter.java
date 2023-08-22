@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "character")
-public class Character {
+public class MovieCharacter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +36,10 @@ public class Character {
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 
-    public Character() {
+    public MovieCharacter() {
     }
 
-    public Character(int id, String name, String alias, Gender gender, String pictureURL) {
+    public MovieCharacter(int id, String name, String alias, Gender gender, String pictureURL) {
         this.id = id;
         this.name = name;
         this.alias = alias;

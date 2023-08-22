@@ -4,15 +4,15 @@ import java.util.Set;
 
 import experis.academy.filmapi.model.Gender;
 
-public class CharacterDto {
+public class CharacterDTO {
     private int id;
     private String name;
     private String alias;
     private Gender gender;
     private String pictureURL;
-    private Set<MovieDto> movies;
+    private Set<MovieDTO> movies;
 
-    public CharacterDto(int id, String name, String alias, Gender gender, String pictureURL, Set<MovieDto> movies) {
+    public CharacterDTO(int id, String name, String alias, Gender gender, String pictureURL, Set<MovieDTO> movies) {
         this.id = id;
         this.name = name;
         this.alias = alias;
@@ -61,11 +61,11 @@ public class CharacterDto {
         this.pictureURL = pictureURL;
     }
 
-    public Set<MovieDto> getMovies() {
+    public Set<MovieDTO> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<MovieDto> movies) {
+    public void setMovies(Set<MovieDTO> movies) {
         this.movies = movies;
     }
 }

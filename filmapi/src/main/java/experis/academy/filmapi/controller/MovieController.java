@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import experis.academy.filmapi.mappers.MovieMapper;
 import experis.academy.filmapi.model.Movie;
 import experis.academy.filmapi.service.MovieService;
 
@@ -21,10 +22,12 @@ import experis.academy.filmapi.service.MovieService;
 public class MovieController {
 
     private final MovieService movieService;
+    private final MovieMapper movieMapper;
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieMapper movieMapper) {
         this.movieService = movieService;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping
@@ -40,6 +43,7 @@ public class MovieController {
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovie(@PathVariable Integer id) {
         try {
+             
             return ResponseEntity.ok(movieService.findById(id));
         } catch (Exception e) {
             // TODO: handle exception

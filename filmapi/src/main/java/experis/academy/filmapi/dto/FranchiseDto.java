@@ -2,13 +2,13 @@ package experis.academy.filmapi.dto;
 
 import java.util.Set;
 
-public class FranchiseDto {
+public class FranchiseDTO {
     private int id;
     private String name;
     private String description;
-    private Set<MovieDto> movies;
+    private Set<MovieDTO> movies;
 
-    public FranchiseDto(int id, String name, String description, Set<MovieDto> movies) {
+    public FranchiseDTO(int id, String name, String description, Set<MovieDTO> movies) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -39,11 +39,11 @@ public class FranchiseDto {
         this.description = description;
     }
 
-    public Set<MovieDto> getMovies() {
+    public Set<MovieDTO> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<MovieDto> movies) {
+    public void setMovies(Set<MovieDTO> movies) {
         this.movies = movies;
     }
 
