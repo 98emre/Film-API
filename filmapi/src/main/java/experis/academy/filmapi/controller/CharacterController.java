@@ -1,13 +1,21 @@
 package experis.academy.filmapi.controller;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import experis.academy.filmapi.model.dto.CharacterDto;
+import experis.academy.filmapi.model.MovieCharacter;
 import experis.academy.filmapi.service.CharacterService;
 
 @RestController
@@ -22,55 +30,50 @@ public class CharacterController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CharacterDto>> getAll() {
+    public ResponseEntity<List<MovieCharacter>> getAll() {
         try {
-            List<CharacterDto> characters = characterService.findAll().stream().collect(Collectors.toList());
-            return ResponseEntity.ok(characters);
+            return ResponseEntity.ok((List<MovieCharacter>) characterService.findAll());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return null;
         }
 
-        catch (Exception e) {
-            System.out.println("Error: " + e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CharacterDto> getCharacter(@PathVariable Integer id) {
+    public ResponseEntity<MovieCharacter> getCharacter(@PathVariable Integer id) {
         try {
-            CharacterDto character = characterService.findById(id);
-            if (character == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            return ResponseEntity.ok(character);
-        }
-
-        catch (Exception e) {
+            return ResponseEntity.ok(characterService.findById(id));
+        } catch (Exception e) {
+            // TODO: handle exception
             System.out.println("Error " + e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return null;
         }
     }
 
     @PostMapping("/add")
-    public ResponseEntity<CharacterDto> addCharacter(@RequestBody CharacterDto characterDto) {
-        return ResponseEntity.ok(characterService.add(characterDto));
+    public ResponseEntity<MovieCharacter> addCharacter(@RequestBody MovieCharacter character) {
+        return ResponseEntity.ok(characterService.add(character));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<CharacterDto> updateCharacter(@PathVariable Integer id,
-            @RequestBody CharacterDto characterDto) {
-
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<MovieCharacter> updateCharacter(@PathVariable Integer id, @RequestBody MovieCharacter character) {
         if (characterService.findById(id) == null) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
-        characterDto.setId(id);
-        return ResponseEntity.ok(characterService.update(characterDto));
+        MovieCharacter updatedCharacter = characterService.findById(id);
+        updatedCharacter.setName(character.getName());
+        updatedCharacter.setAlias(character.getAlias());
+        updatedCharacter.setGender(character.getGender());
+        updatedCharacter.setPictureURL(character.getPictureURL());
+
+        return ResponseEntity.ok(characterService.update(updatedCharacter));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCharacter(@PathVariable Integer id) {
+    public void deleteCharacter(@PathVariable Integer id) {
         characterService.deleteById(id);
-        return ResponseEntity.noContent().build();
     }
+
 }

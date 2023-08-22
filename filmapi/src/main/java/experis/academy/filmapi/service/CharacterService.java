@@ -1,8 +1,7 @@
 package experis.academy.filmapi.service;
 
-import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.dto.CharacterDto;
+import experis.academy.filmapi.model.MovieCharacter;
 
-public interface CharacterService extends CrudService<CharacterDto, Integer> {
+public interface CharacterService extends CrudService<MovieCharacter, Integer> {
 
 }
