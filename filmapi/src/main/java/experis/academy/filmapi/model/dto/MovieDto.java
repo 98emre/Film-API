@@ -18,6 +18,6 @@ public class MovieDto {
     private String director;
     private String posterPictureURL;
     private String trailerLink;
-    private Integer franchiseId;
-    private Set<Integer> characterIds;
+    private FranchiseDto franchise;
+    private Set<CharacterDto> characters;
 }

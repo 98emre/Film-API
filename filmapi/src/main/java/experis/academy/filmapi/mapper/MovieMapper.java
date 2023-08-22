@@ -2,19 +2,33 @@ package experis.academy.filmapi.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.dto.CharacterDto;
 import experis.academy.filmapi.model.dto.MovieDto;
+import experis.academy.filmapi.service.CharacterService;
 
-@Mapper(componentModel = "spring")
-public interface MovieMapper {
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    MovieMapper INSTANCE = Mappers.getMapper(MovieMapper.class);
+@Mapper(componentModel = "spring", uses = CharacterMapper.class)
+public abstract class MovieMapper {
 
-    @Mapping(source = "franchise.id", target = "franchiseId")
-    MovieDto toMovieDto(Movie movie);
+    @Autowired
+    protected CharacterService characterService;
 
-    @Mapping(source = "franchiseId", target = "franchise.id")
-    Movie toMovie(MovieDto movieDto);
+    @Autowired
+    protected CharacterMapper characterMapper;
+
+    @Mapping(target = "characters", source = "characters")
+    @Mapping(target = "franchise.id", source = "franchise.id")
+    public abstract MovieDto toMovieDto(Movie movie);
+
+    @Mapping(target = "characters", source = "characters")
+    @Mapping(target = "franchise.id", source = "franchise.id")
+    public abstract Movie toMovie(MovieDto movieDto);
 }
