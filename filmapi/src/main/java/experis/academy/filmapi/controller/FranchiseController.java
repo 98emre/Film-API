@@ -1,18 +1,12 @@
 package experis.academy.filmapi.controller;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.model.Franchise;
+import experis.academy.filmapi.model.dto.FranchiseDto;
 import experis.academy.filmapi.service.FranchiseService;
 
 @RestController
@@ -27,45 +21,54 @@ public class FranchiseController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Franchise>> getAll() {
+    public ResponseEntity<Collection<FranchiseDto>> getAll() {
         try {
             return ResponseEntity.ok(franchiseService.findAll());
         } catch (Exception e) {
             System.out.println("Error: " + e);
-            return null;
+            return ResponseEntity.status(500).body(null); // It's better to send a 500 status for server errors.
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Franchise> findById(@PathVariable int id) {
+    public ResponseEntity<FranchiseDto> findById(@PathVariable int id) {
         try {
-            return ResponseEntity.ok(franchiseService.findById(id));
+            FranchiseDto franchise = franchiseService.findById(id);
+            if (franchise != null) {
+                return ResponseEntity.ok(franchise);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e);
-            return null;
+            return ResponseEntity.status(500).body(null);
         }
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Franchise> addFranchise(@RequestBody Franchise franchise) {
-        return ResponseEntity.ok(franchiseService.add(franchise));
+    public ResponseEntity<FranchiseDto> addFranchise(@RequestBody FranchiseDto franchiseDto) {
+        return ResponseEntity.ok(franchiseService.add(franchiseDto));
     }
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<Franchise> updateFranchise(@PathVariable Integer id, @RequestBody Franchise franchise) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<FranchiseDto> updateFranchise(@PathVariable Integer id,
+            @RequestBody FranchiseDto franchiseDto) {
         if (franchiseService.findById(id) == null) {
-            return null;
+            return ResponseEntity.notFound().build();
         }
 
-        Franchise updatedFranchise = franchiseService.findById(id);
-        updatedFranchise.setDescription(franchise.getDescription());
-        updatedFranchise.setName(franchise.getName());
-
-        return ResponseEntity.ok(franchiseService.update(updatedFranchise));
+        franchiseDto.setId(id);
+        return ResponseEntity.ok(franchiseService.update(franchiseDto));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteFranchise(@PathVariable Integer id) {
-        franchiseService.deleteById(id);
+    public ResponseEntity<Void> deleteFranchise(@PathVariable Integer id) {
+        try {
+            franchiseService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return ResponseEntity.status(500).build();
+        }
     }
 }
