@@ -51,7 +51,7 @@ public class Movie {
             @JoinColumn(name = "character_id")
     })
 
-    private Set<MovieCharacter> characters;
+    private Set<Character> characters;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "franchise_id")
