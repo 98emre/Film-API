@@ -1,19 +1,12 @@
 package experis.academy.filmapi.controller;
 
-import java.util.Collection;
 
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.dto.MovieDto;
 import experis.academy.filmapi.service.MovieService;
 
 @RestController
@@ -28,52 +21,33 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Movie>> getAll() {
-        try {
-            return ResponseEntity.ok(movieService.findAll());
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-            return null;
-        }
+    public ResponseEntity<Collection<MovieDto>> getAll() {
+        return ResponseEntity.ok(movieService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable Integer id) {
-        try {
-             
-            return ResponseEntity.ok(movieService.findById(id));
-        } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Error " + e);
-            return null;
+    public ResponseEntity<MovieDto> getMovie(@PathVariable Integer id) {
+        MovieDto movieDto = movieService.findById(id);
+        if (movieDto == null) {
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(movieDto);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
-        return ResponseEntity.ok(movieService.add(movie));
+    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
+        return ResponseEntity.ok(movieService.add(movieDto));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable Integer id, @RequestBody Movie movie) {
-        if (movieService.findById(id) == null) {
-            return null;
-        }
-
-        Movie updatedMovie = movieService.findById(id);
-        updatedMovie.setTitle(movie.getTitle());
-        updatedMovie.setGenre(movie.getGenre());
-        updatedMovie.setDirector(movie.getDirector());
-        updatedMovie.setPosterPictureURL(movie.getPosterPictureURL());
-        updatedMovie.setReleaseYear(movie.getReleaseYear());
-        updatedMovie.setTrailerLink(movie.getTrailerLink());
-
-        return ResponseEntity.ok(movieService.update(updatedMovie));
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable Integer id, @RequestBody MovieDto movieDto) {
+        movieDto.setId(id);
+        return ResponseEntity.ok(movieService.update(movieDto));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteMovie(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteMovie(@PathVariable Integer id) {
         movieService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
