@@ -22,9 +22,9 @@ public abstract class CharacterMapper {
     public abstract Character characterUpdateToCharacter(CharacterUpdateDTO characterUpdateDTO);
 
     @Mapping(target = "movieIds", source = "movies", qualifiedByName = "moviesToIds")
-    public abstract CharacterDTO toCharacterDTO(Character character);
+    public abstract CharacterDTO characterToCharacterDTO(Character character);
 
-    public abstract Collection<CharacterDTO> toCharacterDTO(Collection<Character> characters);
+    public abstract Collection<CharacterDTO> charactersToCharactersDTO(Collection<Character> characters);
 
     @Named("moviesToIds")
     Set<Integer> map(Set<Movie> source) {

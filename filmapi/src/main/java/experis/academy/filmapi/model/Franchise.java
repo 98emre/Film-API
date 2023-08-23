@@ -37,6 +37,5 @@ public class Franchise {
     private String description;
 
     @OneToMany(mappedBy = "franchise", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JsonIgnore
     private Set<Movie> movies;
 }

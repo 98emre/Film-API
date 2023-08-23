@@ -32,12 +32,12 @@ public class CharacterController {
 
     @GetMapping
     public ResponseEntity<Collection<CharacterDTO>> getAll() {
-        return ResponseEntity.ok(characterMapper.toCharacterDTO(characterService.findAll()));
+        return ResponseEntity.ok(characterMapper.charactersToCharactersDTO(characterService.findAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CharacterDTO> getCharacter(@PathVariable Integer id) {
-        return ResponseEntity.ok(characterMapper.toCharacterDTO(characterService.findById(id)));
+        return ResponseEntity.ok(characterMapper.characterToCharacterDTO(characterService.findById(id)));
     }
 
     @PostMapping("/add")
