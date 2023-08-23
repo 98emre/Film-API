@@ -3,32 +3,37 @@ package experis.academy.filmapi.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.CharacterDto;
-import experis.academy.filmapi.model.dto.MovieDto;
-import experis.academy.filmapi.service.CharacterService;
+import experis.academy.filmapi.model.dto.movie.MovieDTO;
+import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
+import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = CharacterMapper.class)
 public abstract class MovieMapper {
 
-    @Autowired
-    protected CharacterService characterService;
+    public abstract Movie moviePostDtoToMovie(MoviePostDTO moviepPostDTO);
 
-    @Autowired
-    protected CharacterMapper characterMapper;
+    public abstract Movie movieUpdateDtoToMovie(MovieUpdateDTO movieUpdateDTO);
 
-    @Mapping(target = "characters", source = "characters")
-    @Mapping(target = "franchise.id", source = "franchise.id")
-    public abstract MovieDto toMovieDto(Movie movie);
+    public abstract Collection<MovieDTO> moviesToMoviesDto(Collection<Movie> movies);
 
-    @Mapping(target = "characters", source = "characters")
-    @Mapping(target = "franchise.id", source = "franchise.id")
-    public abstract Movie toMovie(MovieDto movieDto);
+    @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToIds")
+    @Mapping(target = "franchiseId", source = "franchise.id")
+    public abstract MovieDTO movieToMovieDto(Movie movie);
+
+    @Named("charactersToIds")
+    Set<Integer> map(Set<Character> source) {
+        if (source == null) {
+            return null;
+        }
+
+        return source.stream().map(ch -> ch.getId()).collect(Collectors.toSet());
+    }
+
 }
