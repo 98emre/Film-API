@@ -13,6 +13,7 @@ import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Movie;
 import experis.academy.filmapi.model.dto.character.CharacterDTO;
+import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieDTO;
 import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
@@ -68,13 +69,19 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/update/characters/{id}")
+    public ResponseEntity<Void> updateMovieCharacters(@PathVariable Integer id, @RequestBody Set<Integer> charactersId) {
+        movieService.updateCharacters(id, charactersId);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/characters/{id}")
-    public ResponseEntity<Collection<CharacterDTO>> getMovieCharacters(@PathVariable Integer id) {
+    public ResponseEntity<Collection<CharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
         Set<Character> characters = movieService.findCharactersByMovie(id);
         if (characters == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(characterMapper.charactersToCharactersDTO(characters));
+        return ResponseEntity.ok(characterMapper.charactersToCharactersPostDTO(characters));
         
     }
 }

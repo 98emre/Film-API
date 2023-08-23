@@ -26,6 +26,8 @@ public abstract class CharacterMapper {
 
     public abstract Collection<CharacterDTO> charactersToCharactersDTO(Collection<Character> characters);
 
+     public abstract Collection<CharacterPostDTO> charactersToCharactersPostDTO(Collection<Character> characters);
+   
     @Named("moviesToIds")
     Set<Integer> map(Set<Movie> source) {
         if (source == null)
