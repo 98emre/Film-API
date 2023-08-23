@@ -12,14 +12,9 @@ import lombok.Setter;
 @Setter
 public class CharacterDto {
     private int id;
-
     private String name;
-
     private String alias;
-
     private Gender gender;
-
     private String pictureURL;
-
     private Set<Integer> movieIds;
 }
