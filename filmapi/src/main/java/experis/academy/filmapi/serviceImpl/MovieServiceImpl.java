@@ -2,16 +2,15 @@ package experis.academy.filmapi.serviceImpl;
 
 
 import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.movie.MovieDTO;
-import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieService;
+import experis.academy.filmapi.model.Character;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -54,4 +53,8 @@ public class MovieServiceImpl implements MovieService {
         movieRepository.deleteById(id);
     }
 
+    @Override
+    public Set<Character> findCharactersByMovie(int movieId) {
+        return movieRepository.findCharactersByMovie(movieId);
+    }
 }
