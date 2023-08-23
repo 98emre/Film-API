@@ -22,6 +22,7 @@ public abstract class MovieMapper {
     public abstract Movie movieUpdateDtoToMovie(MovieUpdateDTO movieUpdateDTO);
 
     public abstract Collection<MovieDTO> moviesToMoviesDto(Collection<Movie> movies);
+    public abstract Collection<MoviePostDTO> moviesToMoviesPostDto(Collection<Movie> movies);
 
     @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToIds")
     @Mapping(target = "franchiseId", source = "franchise.id")

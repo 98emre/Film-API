@@ -8,7 +8,7 @@ import experis.academy.filmapi.model.Character;
 public interface MovieService extends CrudService<Movie, Integer> {
 
     
-    public Set<Character> findCharactersByMovie(int movieId);
+    public Set<Character> findAllCharactersByMovie(int movieId);
 
     public Movie updateCharacters(int movieId, Set<Integer> charactersId);
 }

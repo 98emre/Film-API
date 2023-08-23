@@ -2,16 +2,21 @@ package experis.academy.filmapi.controller;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import experis.academy.filmapi.mapper.FranchiseMapper;
+import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.model.Franchise;
+import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
 import experis.academy.filmapi.model.dto.franchise.FranchiseDTO;
 import experis.academy.filmapi.model.dto.franchise.FranchisePostDTO;
 import experis.academy.filmapi.model.dto.franchise.FranchiseUpdateDTO;
+import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.service.FranchiseService;
 
 @RestController
@@ -20,11 +25,13 @@ public class FranchiseController {
 
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
+    private final MovieMapper movieMapper;
 
     @Autowired
-    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper) {
+    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper, MovieMapper movieMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping
@@ -61,4 +68,23 @@ public class FranchiseController {
 
         return ResponseEntity.noContent().build();
     }
+
+    
+    @PutMapping("/update/movies/{id}")
+    public ResponseEntity<Void> updateFranchiseMovies(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
+        franchiseService.updateMovies(id, movieIds);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/movies/{id}")
+    public ResponseEntity<Collection<MoviePostDTO>> getFranchiseMovies(@PathVariable Integer id) {
+        Set<Movie> movies = franchiseService.findAllMoviesByFranchise(id);
+        if (movies == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(movieMapper.moviesToMoviesPostDto(movies));
+        
+    }
+
+    
 }

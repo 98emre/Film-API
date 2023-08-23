@@ -58,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Set<Character> findCharactersByMovie(int movieId) {
+    public Set<Character> findAllCharactersByMovie(int movieId) {
         if (!movieRepository.existsById(movieId)) {
             return null;
         }
@@ -68,18 +68,20 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie updateCharacters(int movieId, Set<Integer> charactersId) {
+        if (!movieRepository.existsById(movieId)) {
+            return null;
+        }
+        
         Movie movie = movieRepository.findById(movieId).orElse(null);
-        Set<Character> characters = new HashSet<>();
+            Set<Character> characters = new HashSet<>();
 
-        if (movieRepository.existsById(movieId)) {
             for (int id: charactersId) {
                 if (characterRepository.existsById(id)) {
                     Character character = characterRepository.findById(id).orElse(null);
                     characters.add(character);
                 }
             }
-        }
-        movie.setCharacters(characters);
+            movie.setCharacters(characters);
         return movieRepository.save(movie);
     }
 }

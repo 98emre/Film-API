@@ -77,7 +77,7 @@ public class MovieController {
 
     @GetMapping("/characters/{id}")
     public ResponseEntity<Collection<CharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
-        Set<Character> characters = movieService.findCharactersByMovie(id);
+        Set<Character> characters = movieService.findAllCharactersByMovie(id);
         if (characters == null) {
             return ResponseEntity.notFound().build();
         }
