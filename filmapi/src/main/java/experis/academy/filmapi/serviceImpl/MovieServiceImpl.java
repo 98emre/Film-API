@@ -3,6 +3,7 @@ package experis.academy.filmapi.serviceImpl;
 import experis.academy.filmapi.model.Movie;
 import experis.academy.filmapi.model.dto.movie.MovieDTO;
 import experis.academy.filmapi.mapper.MovieMapper;
+import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
+    private final CharacterRepository characterRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, CharacterRepository characterRepository) {
         this.movieRepository = movieRepository;
+        this.characterRepository = characterRepository;
     }
 
     @Override
