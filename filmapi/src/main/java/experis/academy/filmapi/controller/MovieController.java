@@ -1,11 +1,16 @@
 package experis.academy.filmapi.controller;
 
+import java.net.URI;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.model.dto.MovieDto;
+import experis.academy.filmapi.mapper.MovieMapper;
+import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.dto.movie.MovieDTO;
+import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
+import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
 import experis.academy.filmapi.service.MovieService;
 
 @RestController
@@ -13,35 +18,40 @@ import experis.academy.filmapi.service.MovieService;
 public class MovieController {
 
     private final MovieService movieService;
+    private final MovieMapper movieMapper;
 
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieMapper movieMapper) {
         this.movieService = movieService;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping
-    public ResponseEntity<Collection<MovieDto>> getAll() {
-        return ResponseEntity.ok(movieService.findAll());
+    public ResponseEntity<Collection<MovieDTO>> getAll() {
+        return ResponseEntity.ok(movieMapper.moviesToMoviesDto(movieService.findAll()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDto> getMovie(@PathVariable Integer id) {
-        MovieDto movieDto = movieService.findById(id);
-        if (movieDto == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(movieDto);
+    public ResponseEntity<MovieDTO> getMovie(@PathVariable Integer id) {
+        return ResponseEntity.ok(movieMapper.movieToMovieDto(movieService.findById(id)));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
-        return ResponseEntity.ok(movieService.add(movieDto));
+    public ResponseEntity<Void> addMovie(@RequestBody MoviePostDTO moviePostDTO) {
+        Movie movie = movieService.add(movieMapper.moviePostDtoToMovie(moviePostDTO));
+
+        URI location = URI.create("movie/" + movie.getId());
+
+        return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<MovieDto> updateMovie(@PathVariable Integer id, @RequestBody MovieDto movieDto) {
-        movieDto.setId(id);
-        return ResponseEntity.ok(movieService.update(movieDto));
+    public ResponseEntity<Void> updateMovie(@PathVariable Integer id, @RequestBody MovieUpdateDTO movieUpdateDTO) {
+
+        movieUpdateDTO.setId(id);
+        movieService.update(movieMapper.movieUpdateDtoToMovie(movieUpdateDTO));
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/delete/{id}")
