@@ -2,7 +2,18 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SqlResultSetMappings;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,12 +46,17 @@ public class Movie {
     @Column(name = "trailer_link", length = 200)
     private String trailerLink;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "movie_character", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "character_id")
+    })
+
+    private Set<Character> characters;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "movie_character", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
-            @JoinColumn(name = "character_id") })
-    private Set<Character> characters;
+
+
 }

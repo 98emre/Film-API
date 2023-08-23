@@ -75,3 +75,4 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 }
+

@@ -16,19 +16,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", uses = CharacterMapper.class)
-public abstract class MovieMapper {
+public interface MovieMapper {
 
-    @Autowired
-    protected CharacterService characterService;
+    MovieDto toMovieDto(Movie movie);
 
-    @Autowired
-    protected CharacterMapper characterMapper;
-
-    @Mapping(target = "characters", source = "characters")
-    @Mapping(target = "franchise.id", source = "franchise.id")
-    public abstract MovieDto toMovieDto(Movie movie);
-
-    @Mapping(target = "characters", source = "characters")
-    @Mapping(target = "franchise.id", source = "franchise.id")
-    public abstract Movie toMovie(MovieDto movieDto);
+    Movie toMovie(MovieDto movieDto);
 }

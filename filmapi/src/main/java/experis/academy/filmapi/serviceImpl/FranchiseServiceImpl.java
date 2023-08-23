@@ -59,3 +59,4 @@ public class FranchiseServiceImpl implements FranchiseService {
         franchiseRepository.deleteById(id);
     }
 }
+
