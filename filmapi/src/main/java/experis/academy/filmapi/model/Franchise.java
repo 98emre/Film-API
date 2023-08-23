@@ -2,6 +2,7 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Franchise {
     @Column(length = 500)
     private String description;
 
-    @OneToMany(mappedBy = "franchise")
+    @OneToMany(mappedBy = "franchise", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Movie> movies;
 
     

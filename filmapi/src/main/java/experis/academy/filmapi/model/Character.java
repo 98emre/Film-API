@@ -2,6 +2,7 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,7 +38,7 @@ public class Character {
     @Column(name = "picture_url", length = 200)
     private String pictureURL;
 
-    @ManyToMany(mappedBy = "characters")
+    @ManyToMany(mappedBy = "characters", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Movie> movies;
 
 

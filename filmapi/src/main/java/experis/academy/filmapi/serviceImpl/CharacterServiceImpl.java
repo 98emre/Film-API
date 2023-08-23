@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import experis.academy.filmapi.mapper.CharacterMapper;
 import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.dto.CharacterDto;
+import experis.academy.filmapi.model.dto.character.CharacterDTO;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.service.CharacterService;
 
@@ -17,42 +17,36 @@ import experis.academy.filmapi.service.CharacterService;
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepository characterRepository;
-    private final CharacterMapper characterMapper;
 
     @Autowired
-    public CharacterServiceImpl(CharacterRepository characterRepository, CharacterMapper characterMapper) {
+    public CharacterServiceImpl(CharacterRepository characterRepository) {
         this.characterRepository = characterRepository;
-        this.characterMapper = characterMapper;
     }
 
     @Override
-    public CharacterDto findById(Integer id) {
-        return characterRepository.findById(id).map(characterMapper::toCharacterDto).orElse(null);
+    public Character findById(Integer id) {
+        return characterRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Collection<CharacterDto> findAll() {
+    public Collection<Character> findAll() {
         return characterRepository.findAll().stream()
                 .sorted(Comparator.comparingInt(Character::getId))
-                .map(characterMapper::toCharacterDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CharacterDto add(CharacterDto characterDto) {
-        Character character = characterMapper.toCharacter(characterDto);
-        Character savedCharacter = characterRepository.save(character);
-        return characterMapper.toCharacterDto(savedCharacter);
+    public Character add(Character character) {
+        return characterRepository.save(character);
     }
 
     @Override
-    public CharacterDto update(CharacterDto characterDto) {
-        if (!characterRepository.existsById(characterDto.getId())) {
+    public Character update(Character character) {
+        if (!characterRepository.existsById(character.getId())) {
             return null; // or throw an exception
         }
-        Character character = characterMapper.toCharacter(characterDto);
-        Character updatedCharacter = characterRepository.save(character);
-        return characterMapper.toCharacterDto(updatedCharacter);
+
+        return characterRepository.save(character);
     }
 
     @Override
