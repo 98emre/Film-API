@@ -68,18 +68,18 @@ public class FranchiseServiceImpl implements FranchiseService {
         if (!franchiseRepository.existsById(franchiseId)) {
             return null;
         }
-        
-        Franchise franchise = franchiseRepository.findById(franchiseId).orElse(null);
-            Set<Movie> movies = new HashSet<>();
 
-            for (int id: moviesId) {
-                if (movieRepository.existsById(id)) {
-                    Movie movie = movieRepository.findById(id).orElse(null);
-                    movies.add(movie);
-                }
+        Franchise franchise = franchiseRepository.findById(franchiseId).orElse(null);
+        Set<Movie> movies = new HashSet<>();
+
+        for (int id : moviesId) {
+            if (movieRepository.existsById(id)) {
+                Movie movie = movieRepository.findById(id).orElse(null);
+                movie.setFranchise(franchise);
+                movies.add(movie);
             }
-            franchise.setMovies(movies);
+        }
+
         return franchiseRepository.save(franchise);
     }
 }
-
