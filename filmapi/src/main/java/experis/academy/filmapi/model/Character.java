@@ -34,6 +34,5 @@ public class Character {
     private String pictureURL;
 
     @ManyToMany(mappedBy = "characters", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
-    @JsonIgnore
     private Set<Movie> movies;
 }
