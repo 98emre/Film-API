@@ -2,16 +2,23 @@ package experis.academy.filmapi.controller;
 
 import java.net.URI;
 import java.util.Collection;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import experis.academy.filmapi.mapper.CharacterMapper;
 import experis.academy.filmapi.mapper.MovieMapper;
+import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.dto.character.CharacterDTO;
+import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieDTO;
 import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
 import experis.academy.filmapi.service.MovieService;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping(path = "api/movie")
@@ -19,11 +26,13 @@ public class MovieController {
 
     private final MovieService movieService;
     private final MovieMapper movieMapper;
+    private final CharacterMapper characterMapper;
 
     @Autowired
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    public MovieController(MovieService movieService, MovieMapper movieMapper, CharacterMapper characterMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
+        this.characterMapper = characterMapper;
     }
 
     @GetMapping
@@ -58,5 +67,21 @@ public class MovieController {
     public ResponseEntity<Void> deleteMovie(@PathVariable Integer id) {
         movieService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/update/characters/{id}")
+    public ResponseEntity<Void> updateMovieCharacters(@PathVariable Integer id, @RequestBody Set<Integer> charactersId) {
+        movieService.updateCharacters(id, charactersId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/characters/{id}")
+    public ResponseEntity<Collection<CharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
+        Set<Character> characters = movieService.findAllCharactersByMovie(id);
+        if (characters == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(characterMapper.charactersToCharactersPostDTO(characters));
+        
     }
 }

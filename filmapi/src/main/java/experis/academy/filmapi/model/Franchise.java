@@ -2,15 +2,9 @@ package experis.academy.filmapi.model;
 
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,9 +27,11 @@ public class Franchise {
     @Column(length = 50, nullable = false)
     private String name;
 
-    @Column(length = 300)
+    @Column(length = 500)
     private String description;
 
     @OneToMany(mappedBy = "franchise", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Movie> movies;
+
+    
 }
