@@ -18,7 +18,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query(value = "SELECT c.character_id, c.alias, c.character_name, c.picture_url, c.gender FROM character AS c " + 
             "INNER JOIN movie_character AS mc ON c.character_id = mc.character_id " + 
             "INNER JOIN movie AS m ON mc.movie_id = m.movie_id " + 
-            "WHERE m.movie_id = ?1;", nativeQuery = true)
+            "WHERE m.movie_id = ?1", nativeQuery = true)
     List<Character> findCharactersByMovie(int movieId);
 
 }
