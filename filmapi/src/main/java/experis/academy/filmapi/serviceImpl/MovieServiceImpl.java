@@ -1,8 +1,6 @@
 package experis.academy.filmapi.serviceImpl;
 
 import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.movie.MovieDTO;
-import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieService;

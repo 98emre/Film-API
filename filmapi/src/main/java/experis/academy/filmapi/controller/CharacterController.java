@@ -48,7 +48,7 @@ public class CharacterController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}/update")
     public ResponseEntity<Void> updateCharacter(@RequestBody CharacterUpdateDTO characterUpdateDTO,
             @PathVariable int id) {
 
@@ -57,10 +57,9 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteCharacterById(@PathVariable Integer id) {
         characterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
-
