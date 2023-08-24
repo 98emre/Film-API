@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import experis.academy.filmapi.mapper.CharacterMapper;
 import experis.academy.filmapi.mapper.FranchiseMapper;
 import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.model.Franchise;
@@ -26,12 +27,15 @@ public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final MovieMapper movieMapper;
+    private final CharacterMapper characterMapper;
 
     @Autowired
-    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper, MovieMapper movieMapper) {
+    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper,
+            MovieMapper movieMapper, CharacterMapper characterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
         this.movieMapper = movieMapper;
+        this.characterMapper = characterMapper;
     }
 
     @GetMapping
@@ -69,7 +73,6 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
-    
     @PutMapping("/update/movies/{id}")
     public ResponseEntity<Void> updateFranchiseMovies(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
         franchiseService.updateMovies(id, movieIds);
@@ -83,8 +86,14 @@ public class FranchiseController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(movieMapper.moviesToMoviesPostDto(movies));
-        
+
     }
 
-    
+    @GetMapping("/movies/characters/{id}")
+    public ResponseEntity<Collection<CharacterPostDTO>> getFranchiseMovieCharacters(@PathVariable Integer id) {
+        return ResponseEntity.ok(
+                characterMapper.charactersToCharactersPostDTO(
+                        franchiseService.findAllCharactersByFranchise(id)));
+    }
+
 }
