@@ -7,9 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import experis.academy.filmapi.mapper.CharacterMapper;
+import experis.academy.filmapi.exceptions.CharacterNotFoundException;
 import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.dto.character.CharacterDTO;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.service.CharacterService;
 
@@ -25,7 +24,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character findById(Integer id) {
-        return characterRepository.findById(id).orElse(null);
+        return characterRepository.findById(id).orElseThrow(() -> new CharacterNotFoundException(id));
     }
 
     @Override
@@ -43,7 +42,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public Character update(Character character) {
         if (!characterRepository.existsById(character.getId())) {
-            return null; // or throw an exception
+            throw new CharacterNotFoundException(character.getId());
         }
 
         return characterRepository.save(character);
@@ -51,6 +50,10 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public void deleteById(Integer id) {
+        if (!characterRepository.existsById(id)) {
+            throw new CharacterNotFoundException(id);
+        }
+
         characterRepository.deleteById(id);
     }
 
