@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import experis.academy.filmapi.exceptions.FranchiseNotFoundException;
+import experis.academy.filmapi.exceptions.MovieNotFoundException;
 import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Franchise;
 import experis.academy.filmapi.model.Movie;
@@ -37,7 +39,7 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise findById(Integer id) {
-        return franchiseRepository.findById(id).orElse(null);
+        return franchiseRepository.findById(id).orElseThrow(() -> new FranchiseNotFoundException(id));
     }
 
     @Override
@@ -47,35 +49,40 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise update(Franchise franchise) {
+        if (!franchiseRepository.existsById(franchise.getId())) {
+            throw new FranchiseNotFoundException(franchise.getId());
+        }
+
         return franchiseRepository.save(franchise);
     }
 
     @Override
     public void deleteById(Integer id) {
+        if (!franchiseRepository.existsById(id)) {
+            throw new FranchiseNotFoundException(id);
+        }
+
         franchiseRepository.deleteById(id);
     }
 
     @Override
     public Set<Movie> findAllMoviesByFranchise(int franchiseId) {
-        if (!franchiseRepository.existsById(franchiseId)) {
-            return null;
-        }
-        Franchise franchise = franchiseRepository.findById(franchiseId).orElse(null);
+        Franchise franchise = franchiseRepository.findById(franchiseId)
+                .orElseThrow(() -> new FranchiseNotFoundException(franchiseId));
         return franchise.getMovies();
     }
 
     @Override
     public Franchise updateMovies(int franchiseId, Set<Integer> moviesId) {
-        if (!franchiseRepository.existsById(franchiseId)) {
-            return null;
-        }
 
-        Franchise franchise = franchiseRepository.findById(franchiseId).orElse(null);
+        Franchise franchise = franchiseRepository.findById(franchiseId)
+                .orElseThrow(() -> new FranchiseNotFoundException(franchiseId));
+
         Set<Movie> movies = new HashSet<>();
 
         for (int id : moviesId) {
             if (movieRepository.existsById(id)) {
-                Movie movie = movieRepository.findById(id).orElse(null);
+                Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
                 movie.setFranchise(franchise);
                 movies.add(movie);
             }
@@ -87,7 +94,7 @@ public class FranchiseServiceImpl implements FranchiseService {
     @Override
     public Set<Character> findAllCharactersByFranchise(int franchiseId) {
         if (!franchiseRepository.existsById(franchiseId)) {
-            return null;
+            throw new FranchiseNotFoundException(franchiseId);
         }
 
         Set<Character> characters = new HashSet<>();
