@@ -21,7 +21,7 @@ import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.service.FranchiseService;
 
 @RestController
-@RequestMapping(path = "api/franchise")
+@RequestMapping(path = "api/franchises")
 public class FranchiseController {
 
     private final FranchiseService franchiseService;

@@ -12,16 +12,14 @@ import experis.academy.filmapi.mapper.CharacterMapper;
 import experis.academy.filmapi.mapper.MovieMapper;
 import experis.academy.filmapi.model.Character;
 import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.character.CharacterDTO;
 import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieDTO;
 import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
 import experis.academy.filmapi.service.MovieService;
-import jakarta.transaction.Transactional;
 
 @RestController
-@RequestMapping(path = "api/movie")
+@RequestMapping(path = "api/movies")
 public class MovieController {
 
     private final MovieService movieService;
