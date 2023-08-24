@@ -5,7 +5,7 @@ Film API is a RESTful API containing a datastore and an interface allowing users
 ![Alt text](erDiagram.png)  
 Picture 1. ER Diagram of the database created with Hibernate
 
-
+  
 ## Installation
 
 ### Prerequisites
@@ -37,10 +37,10 @@ Make sure all you have all of the following dependencies in your pom.xml file an
 - mapstruct
 - mapstruct-processor
 
-
+  
 As well as verifying that your maven plugin version exists and is not later than your installed maven version.
 
-
+  
 In the application.properties file, to configure to your database, set your environment variables alternatively set them explicitly:
 ```
 spring.datasource.url=${POSTGRES_URL}
@@ -48,7 +48,7 @@ spring.datasource.username=${POSTGRES_USERNAME}
 spring.datasource.password=${POSTGRES_PASSWORD}
 ```
 
-
+  
 When mapping and seeding the database and running the application for the first time, make sure this property is set to create:
 ```
 spring.jpa.hibernate.ddl-auto=create
@@ -59,11 +59,11 @@ When mapping and seeding is completed set the property to update:
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-
+  
 ## Usage
 The application will run on port 8080 by default. 
 If another port would be desired, this can be set in the application.properties file.
-
+  
 
 ### API Endpoints
 | HTTP Verbs | Endpoints | Action |
@@ -89,10 +89,10 @@ If another port would be desired, this can be set in the application.properties 
 
 
 ## Authors
-
+  
 @levenfalk  
 @98emre
 
-
+  
 ## License
 This project is available for use under the [MIT License](https://choosealicense.com/licenses/mit/) 
