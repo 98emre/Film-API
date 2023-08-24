@@ -1,13 +1,13 @@
 package experis.academy.filmapi.exceptions;
 
-public class FranchiseNotFoundException extends Exception {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public FranchiseNotFoundException() {
-        super();
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class FranchiseNotFoundException extends RuntimeException {
+
+    public FranchiseNotFoundException(int id) {
+        super("Franchise with id: " + id + " does not exist");
     }
 
-    public FranchiseNotFoundException(String message) {
-        super(message);
-    }
-    
 }
