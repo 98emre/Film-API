@@ -40,10 +40,10 @@ public class Movie {
     @Column(length = 50, nullable = false)
     private String director;
 
-    @Column(name = "picture_url", length = 200)
+    @Column(name = "picture_url", length = 1000)
     private String posterPictureURL;
 
-    @Column(name = "trailer_link", length = 200)
+    @Column(name = "trailer_link", length = 1000)
     private String trailerLink;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

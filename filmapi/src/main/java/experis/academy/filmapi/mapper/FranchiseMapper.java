@@ -28,7 +28,7 @@ public abstract class FranchiseMapper {
     public abstract FranchiseDTO franchiseToFranchiseDto(Franchise franchise);
 
     @Named("moviesToIds")
-    Set<Integer> map(Set<Movie> source) {
+    Set<Integer> map(Set<Movie> source) { 
         if (source == null)
             return null;
         return source.stream().map(m -> m.getId()).collect(Collectors.toSet());

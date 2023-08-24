@@ -35,7 +35,7 @@ public class Character {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "picture_url", length = 200)
+    @Column(name = "picture_url", length = 1000)
     private String pictureURL;
 
     @ManyToMany(mappedBy = "characters", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
