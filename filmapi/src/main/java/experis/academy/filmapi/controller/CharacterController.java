@@ -13,9 +13,11 @@ import experis.academy.filmapi.model.dto.character.CharacterDTO;
 import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
 import experis.academy.filmapi.model.dto.character.CharacterUpdateDTO;
 import experis.academy.filmapi.service.CharacterService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "api/characters")
+@Tag(name = "Characters", description = "Endpoints interact with characters")
 public class CharacterController {
 
     private final CharacterService characterService;

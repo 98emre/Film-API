@@ -19,9 +19,11 @@ import experis.academy.filmapi.model.dto.franchise.FranchisePostDTO;
 import experis.academy.filmapi.model.dto.franchise.FranchiseUpdateDTO;
 import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.service.FranchiseService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "api/franchises")
+@Tag(name = "Franchise", description = "Endpoints interact with franchise")
 public class FranchiseController {
 
     private final FranchiseService franchiseService;

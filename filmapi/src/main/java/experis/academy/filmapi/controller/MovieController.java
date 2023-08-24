@@ -17,9 +17,11 @@ import experis.academy.filmapi.model.dto.movie.MovieDTO;
 import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
 import experis.academy.filmapi.service.MovieService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "api/movies")
+@Tag(name = "Movie", description = "Endpoints interact with movie")
 public class MovieController {
 
     private final MovieService movieService;
