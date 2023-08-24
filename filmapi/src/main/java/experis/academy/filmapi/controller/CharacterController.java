@@ -2,11 +2,8 @@ package experis.academy.filmapi.controller;
 
 import java.net.URI;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +45,7 @@ public class CharacterController {
         return ResponseEntity.created(location).build();
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}/update")
     public ResponseEntity<Void> updateCharacter(@RequestBody CharacterUpdateDTO characterUpdateDTO,
             @PathVariable int id) {
 
@@ -57,10 +54,9 @@ public class CharacterController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteCharacterById(@PathVariable Integer id) {
         characterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
-
