@@ -9,7 +9,7 @@ Picture 1. ER Diagram of the database created with Hibernate
 ## Java Installation Guide
 
 ### Step 1: Download Java
-First download latest version of Java [Java](https://www.oracle.com/java/) to install.
+First download latest version of [Java](https://www.oracle.com/java/) to install.
 
 ### Step 2: Verify Installation
 Open a new command prompt (or terminal) and type:
@@ -22,7 +22,7 @@ This should display Java's version, indicating a successful installation.
 ## Maven Installation Guide
 
 ### Step 1: Download Maven
-First download the latest version of Maven [Maven](https://maven.apache.org/download.cgi).
+First download the latest version of [Maven](https://maven.apache.org/download.cgi).
 
 ### Step 2: Installed Maven
 Extract the downloaded file to a suitable location on your computer.
@@ -108,7 +108,7 @@ spring.jpa.hibernate.ddl-auto=update
 The application will run on port 8080 by default. 
 If another port would be desired, this can be set in the application.properties file.
 
-When the application is running you can use Swagger for testing the API [Swagger URL](http://localhost:8080/swagger-ui/index.html#/)
+When the application is running you can use [Swagger](http://localhost:8080/swagger-ui/index.html#/) for testing the API.
 
 ### API Endpoints
 
