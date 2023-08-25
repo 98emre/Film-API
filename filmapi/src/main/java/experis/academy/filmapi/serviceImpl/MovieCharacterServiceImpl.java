@@ -2,13 +2,16 @@ package experis.academy.filmapi.serviceImpl;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import experis.academy.filmapi.model.entites.Movie;
 import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.repository.MovieCharacterRepository;
+import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieCharacterService;
 import experis.academy.filmapi.utilites.exceptions.MovieCharacterNotFoundException;
 
@@ -16,10 +19,12 @@ import experis.academy.filmapi.utilites.exceptions.MovieCharacterNotFoundExcepti
 public class MovieCharacterServiceImpl implements MovieCharacterService {
 
     private final MovieCharacterRepository characterRepository;
+    private final MovieRepository movieRepository;
 
     @Autowired
-    public MovieCharacterServiceImpl(MovieCharacterRepository characterRepository) {
+    public MovieCharacterServiceImpl(MovieCharacterRepository characterRepository, MovieRepository movieRepository) {
         this.characterRepository = characterRepository;
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -50,10 +55,17 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
 
     @Override
     public void deleteById(Integer id) {
-        if (!characterRepository.existsById(id)) {
-            throw new MovieCharacterNotFoundException(id);
-        }
+        MovieCharacter movieCharacter = characterRepository.findById(id)
+                .orElseThrow(() -> new MovieCharacterNotFoundException(id));
 
+        Set<Movie> movies = movieCharacter.getMovies();
+
+        for (Movie movie : movies) {
+            Set<MovieCharacter> characters = movie.getCharacters();
+            characters.remove(movieCharacter);
+            movie.setCharacters(characters);
+            movieRepository.save(movie);
+        }
         characterRepository.deleteById(id);
     }
 
