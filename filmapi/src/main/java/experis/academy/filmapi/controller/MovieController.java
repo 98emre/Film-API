@@ -34,7 +34,12 @@ public class MovieController {
         this.movieMapper = movieMapper;
         this.characterMapper = characterMapper;
     }
-    
+
+    @GetMapping
+    public ResponseEntity<Collection<MovieDTO>> getAll() {
+        return ResponseEntity.ok(movieMapper.moviesToMoviesDto(movieService.findAll()));
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Void> addMovie(@RequestBody MoviePostDTO moviePostDTO) {
         Movie movie = movieService.add(movieMapper.moviePostDtoToMovie(moviePostDTO));
@@ -42,11 +47,6 @@ public class MovieController {
         URI location = URI.create("movie/" + movie.getId());
 
         return ResponseEntity.created(location).build();
-    }
-
-    @GetMapping
-    public ResponseEntity<Collection<MovieDTO>> getAll() {
-        return ResponseEntity.ok(movieMapper.moviesToMoviesDto(movieService.findAll()));
     }
 
     @GetMapping("/{id}")
@@ -72,10 +72,17 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/update/characters")
-    public ResponseEntity<Void> updateMovieCharacters(@PathVariable Integer id,
+    @PutMapping("/{id}/add/characters")
+    public ResponseEntity<Void> addMovieCharacters(@PathVariable Integer id,
             @RequestBody Set<Integer> charactersId) {
-        movieService.updateCharacters(id, charactersId);
+        movieService.addCharacters(id, charactersId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/remove/characters")
+    public ResponseEntity<Void> removeMovieCharacters(@PathVariable Integer id,
+            @RequestBody Set<Integer> charactersId) {
+        movieService.removeCharacters(id, charactersId);
         return ResponseEntity.noContent().build();
     }
 
@@ -84,6 +91,5 @@ public class MovieController {
         movieService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }

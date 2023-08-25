@@ -20,18 +20,20 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Characters", description = "Endpoints interact with characters")
 public class MovieCharacterController {
 
-    private final MovieCharacterService characterService;
-    private final MovieCharacterMapper characterMapper;
+    private final MovieCharacterService movieCharacterService;
+    private final MovieCharacterMapper movieCharacterMapper;
 
     @Autowired
-    public MovieCharacterController(MovieCharacterService characterService, MovieCharacterMapper characterMapper) {
-        this.characterService = characterService;
-        this.characterMapper = characterMapper;
+    public MovieCharacterController(MovieCharacterService movieCharacterService,
+            MovieCharacterMapper movieCharacterMapper) {
+        this.movieCharacterService = movieCharacterService;
+        this.movieCharacterMapper = movieCharacterMapper;
     }
 
     @PostMapping("/add")
     public ResponseEntity<Void> addCharacter(@RequestBody MovieCharacterPostDTO characterPostDTO) {
-        MovieCharacter character = characterService.add(characterMapper.characterPostToCharacter(characterPostDTO));
+        MovieCharacter character = movieCharacterService
+                .add(movieCharacterMapper.characterPostToCharacter(characterPostDTO));
         URI location = URI.create("characters/" + character.getId());
 
         return ResponseEntity.created(location).build();
@@ -39,26 +41,26 @@ public class MovieCharacterController {
 
     @GetMapping
     public ResponseEntity<Collection<MovieCharacterDTO>> getAll() {
-        return ResponseEntity.ok(characterMapper.charactersToCharactersDTO(characterService.findAll()));
+        return ResponseEntity.ok(movieCharacterMapper.charactersToCharactersDTO(movieCharacterService.findAll()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MovieCharacterDTO> getCharacter(@PathVariable Integer id) {
-        return ResponseEntity.ok(characterMapper.characterToCharacterDTO(characterService.findById(id)));
+        return ResponseEntity.ok(movieCharacterMapper.characterToCharacterDTO(movieCharacterService.findById(id)));
     }
 
     @PutMapping("/{id}/update")
-    public ResponseEntity<Void> updateCharacter(@RequestBody MovieCharacterUpdateDTO characterUpdateDTO,
+    public ResponseEntity<Void> updateCharacter(@RequestBody MovieCharacterUpdateDTO movieCharacterUpdateDTO,
             @PathVariable int id) {
 
-        characterUpdateDTO.setId(id);
-        characterService.update(characterMapper.characterUpdateToCharacter(characterUpdateDTO));
+        movieCharacterUpdateDTO.setId(id);
+        movieCharacterService.update(movieCharacterMapper.characterUpdateToCharacter(movieCharacterUpdateDTO));
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteCharacterById(@PathVariable Integer id) {
-        characterService.deleteById(id);
+        movieCharacterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

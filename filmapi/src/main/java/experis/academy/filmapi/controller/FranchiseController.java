@@ -29,15 +29,15 @@ public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final MovieMapper movieMapper;
-    private final MovieCharacterMapper characterMapper;
+    private final MovieCharacterMapper movieCharacterMapper;
 
     @Autowired
     public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper,
-            MovieMapper movieMapper, MovieCharacterMapper characterMapper) {
+            MovieMapper movieMapper, MovieCharacterMapper movieCharacterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
         this.movieMapper = movieMapper;
-        this.characterMapper = characterMapper;
+        this.movieCharacterMapper = movieCharacterMapper;
     }
 
     @PostMapping("/add")
@@ -56,6 +56,19 @@ public class FranchiseController {
     @GetMapping("/{id}")
     public ResponseEntity<FranchiseDTO> findById(@PathVariable int id) {
         return ResponseEntity.ok(franchiseMapper.franchiseToFranchiseDto(franchiseService.findById(id)));
+
+    }
+
+    @PutMapping("/{id}/add/movies")
+    public ResponseEntity<Void> addMoviesToFranchise(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
+        franchiseService.addMovies(id, movieIds);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/remove/movies")
+    public ResponseEntity<Void> removeMoviesToFranchise(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
+        franchiseService.removeMovies(id, movieIds);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/movies")
@@ -71,7 +84,7 @@ public class FranchiseController {
     @GetMapping("/{id}/movies/characters")
     public ResponseEntity<Collection<MovieCharacterPostDTO>> getFranchiseMovieCharacters(@PathVariable Integer id) {
         return ResponseEntity.ok(
-                characterMapper.charactersToCharactersPostDTO(
+                movieCharacterMapper.charactersToCharactersPostDTO(
                         franchiseService.findAllCharactersByFranchise(id)));
     }
 
@@ -84,12 +97,6 @@ public class FranchiseController {
 
         return ResponseEntity.noContent().build();
     }
-    
-    @PutMapping("/{id}/update/movies")
-    public ResponseEntity<Void> updateFranchiseMovies(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
-        franchiseService.updateMovies(id, movieIds);
-        return ResponseEntity.noContent().build();
-    }
 
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<Void> deleteFranchiseById(@PathVariable Integer id) {
@@ -97,7 +104,5 @@ public class FranchiseController {
 
         return ResponseEntity.noContent().build();
     }
-
-
 
 }
