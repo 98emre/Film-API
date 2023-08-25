@@ -119,22 +119,26 @@ When the application is running you can use [Swagger](http://localhost:8080/swag
 | GET | /api/movies | To retrieve all movies on the platform |
 | GET | /api/movies/:movieId | To retrieve details of a single movie |
 | GET | /api/movies/:movieId/characters | To retrieve all characters of a single movie |
-| PATCH | /api/movies/update/:movieId | To edit the details of a single movie |
-| DELETE | /api/movies/delete/:movieId | To delete a single movie |
-| **Character** | | |
+| PATCH | /api/movies/:movieId/update | To edit the details of a single movie |
+| PATCH | /api/movies/:movieId/add/characters | To add the details of a single movie |
+| DELETE | /api/movies/:movieId/delete | To delete a single movie |
+| DELETE | /api/movies/:movieId/remove/characters | To delete a set of characters from single movie |
+| **Movie Character** | | |
 | POST | /api/characters/add | To create a new character |
 | GET | /api/characters | To retrieve all characters on the platform |
 | GET | /api/characters/:characterId | To retrieve details of a single character |
-| PATCH | /api/characters/update/:characterId | To edit the details of a single character |
-| DELETE | /api/characters/delete/:characterId | To delete a single character |
+| PATCH | /api/characters/:characterId/update | To edit the details of a single character |
+| DELETE | /api/characters/:characterId/delete | To delete a single character |
 | **Franchise** | | |
 | POST | /api/franchises/add | To create a new franchise |
 | GET | /api/franchises | To retrieve all franchises on the platform |
 | GET | /api/franchises/:franchiseId | To retrieve details of a single franchise |
 | GET | /api/franchises/:franchiseId/movies | To retrieve all movies of a single franchise |
 | GET | /api/franchises/:franchiseId/movies/characters | To retrieve all characters of all the movies of a single franchise | 
-| PATCH | /api/franchises/update/:franchiseId | To edit the details of a single franchise |
-| DELETE | /api/franchises/delete/:franchiseId | To delete a single franchise |
+| PATCH | /api/franchises/:franchiseId/update | To edit the details of a single franchise |
+| PATCH | /api/franchises/:franchiseId/update/movies | To edit the details of a single franchise |
+| DELETE | /api/franchises/:franchiseId/delete | To delete a single franchise |
+| DELETE | /api/franchises/:franchiseId/remove/movies | To remove movies from a single franchise |
 
 ## Authors
 Emre Demirel @98emre
