@@ -66,27 +66,37 @@ If another port would be desired, this can be set in the application.properties 
   
 
 ### API Endpoints
+
+#### Movie
 | HTTP Verbs | Endpoints | Action |
 | --- | --- | --- |
 | POST | /api/movies/add | To create a new movie |
-| POST | /api/characters/add | To create a new character |
-| POST | /api/franchises/add | To create a new franchise |
 | GET | /api/movies | To retrieve all movies on the platform |
-| GET | /api/characters | To retrieve all characters on the platform |
-| GET | /api/franchises | To retrieve all franchises on the platform |
 | GET | /api/movies/:movieId | To retrieve details of a single movie |
-| GET | /api/characters/:characterId | To retrieve details of a single character |
-| GET | /api/franchises/:franchiseId | To retrieve details of a single franchise |
 | GET | /api/movies/:movieId/characters | To retrieve all characters of a single movie |
+| PATCH | /api/movies/update/:movieId | To edit the details of a single movie |
+| DELETE | /api/movies/delete/:movieId | To delete a single movie |
+
+#### Character
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| POST | /api/characters/add | To create a new character |
+| GET | /api/characters | To retrieve all characters on the platform |
+| GET | /api/characters/:characterId | To retrieve details of a single character |
+| PATCH | /api/characters/update/:characterId | To edit the details of a single character |
+| DELETE | /api/characters/delete/:characterId | To delete a single character |
+
+
+#### Franchise
+| HTTP Verbs | Endpoints | Action |
+| --- | --- | --- |
+| POST | /api/franchises/add | To create a new franchise |
+| GET | /api/franchises | To retrieve all franchises on the platform |
+| GET | /api/franchises/:franchiseId | To retrieve details of a single franchise |
 | GET | /api/franchises/:franchiseId/movies | To retrieve all movies of a single franchise |
 | GET | /api/franchises/:franchiseId/movies/characters | To retrieve all characters of all the movies of a single franchise | 
-| PATCH | /api/movies/update/:movieId | To edit the details of a single movie |
-| PATCH | /api/characters/update/:characterId | To edit the details of a single character |
 | PATCH | /api/franchises/update/:franchiseId | To edit the details of a single franchise |
-| DELETE | /api/movies/delete/:movieId | To delete a single movie |
-| DELETE | /api/characters/delete/:characterId | To delete a single character |
 | DELETE | /api/franchises/delete/:franchiseId | To delete a single franchise |
-
 
 ## Authors
   
