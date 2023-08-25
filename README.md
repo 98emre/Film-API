@@ -123,7 +123,7 @@ If another port would be desired, this can be set in the application.properties 
 
 #### Character
 | Character |
-| --------- |
+| --------- | --------- | --------- |
 | HTTP Verbs | Endpoints | Action |
 | --------- | --------- | --------- |
 | POST | /api/characters/add | To create a new character |
