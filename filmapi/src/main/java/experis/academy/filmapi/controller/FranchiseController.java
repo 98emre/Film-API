@@ -75,9 +75,15 @@ public class FranchiseController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/update/movies")
-    public ResponseEntity<Void> updateFranchiseMovies(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
-        franchiseService.updateMovies(id, movieIds);
+    @PutMapping("/{id}/add/movies")
+    public ResponseEntity<Void> addMoviesToFranchise(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
+        franchiseService.addMovies(id, movieIds);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/remove/movies")
+    public ResponseEntity<Void> removeMoviesToFranchise(@PathVariable Integer id, @RequestBody Set<Integer> movieIds) {
+        franchiseService.removeMovies(id, movieIds);
         return ResponseEntity.noContent().build();
     }
 

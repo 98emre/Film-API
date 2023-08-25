@@ -87,18 +87,36 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public Franchise updateMovies(int franchiseId, Set<Integer> moviesId) {
+    public Franchise addMovies(int franchiseId, Set<Integer> movieIds) {
 
         Franchise franchise = franchiseRepository.findById(franchiseId)
                 .orElseThrow(() -> new FranchiseNotFoundException(franchiseId));
 
-        Set<Movie> movies = new HashSet<>();
+        for (int id : movieIds) {
+            Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
+            movie.setFranchise(franchise);
+        }
 
-        for (int id : moviesId) {
-            if (movieRepository.existsById(id)) {
-                Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
+        return franchiseRepository.save(franchise);
+    }
+
+    @Override
+    public Franchise removeMovies(int franchiseId, Set<Integer> movieIds) {
+        Franchise franchise = franchiseRepository.findById(franchiseId)
+                .orElseThrow(() -> new FranchiseNotFoundException(franchiseId));
+
+        Set<Movie> currentFranchiseMovies = franchise.getMovies();
+
+        for (int id : movieIds) {
+            Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
+            movie.setFranchise(null);
+        }
+
+        for (Movie m : currentFranchiseMovies) {
+            if (!movieIds.contains(m.getId())) {
+                Movie movie = movieRepository.findById(m.getId())
+                        .orElseThrow(() -> new MovieNotFoundException(m.getId()));
                 movie.setFranchise(franchise);
-                movies.add(movie);
             }
         }
 
@@ -121,4 +139,5 @@ public class FranchiseServiceImpl implements FranchiseService {
         return characters;
 
     }
+
 }

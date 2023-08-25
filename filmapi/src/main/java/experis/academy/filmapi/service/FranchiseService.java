@@ -10,7 +10,9 @@ public interface FranchiseService extends CrudService<Franchise, Integer> {
 
     public Set<Movie> findAllMoviesByFranchise(int franchiseId);
 
-    public Franchise updateMovies(int franchiseId, Set<Integer> moviesId);
+    public Franchise addMovies(int franchiseId, Set<Integer> movieIds);
+
+    public Franchise removeMovies(int franchiseId, Set<Integer> movieIds);
 
     public Set<MovieCharacter> findAllCharactersByFranchise(int franchiseId);
 
