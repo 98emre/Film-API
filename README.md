@@ -54,12 +54,12 @@ mvn --version
 This should display Maven's version, indicating a successful installation.
 
 
-### Database
+## Database
 
 - A relational database management system (RDBMS) supporting SQL, suggestively PostgreSQL
 
 
-### Configuration
+## Configuration
 
 To clone this application run the following command in your terminal:
 ```bash
@@ -67,7 +67,7 @@ git clone https://github.com/98emre/Film-API
 ```
 
 
-#### Dependencies in your application.properties file
+### Dependencies in your application.properties file
 
 Make sure all you have all of the following dependencies in your pom.xml file and use the latest version:
 - spring-boot-starter
@@ -133,9 +133,9 @@ If another port would be desired, this can be set in the application.properties 
 
 
 ## Authors
-  
-@levenfalk  
-@98emre
+
+Emmre Demirel @98emre
+Nathalie Levenfalk @levenfalk  
 
   
 ## License
