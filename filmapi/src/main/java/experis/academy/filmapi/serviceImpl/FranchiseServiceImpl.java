@@ -58,8 +58,14 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public void deleteById(Integer id) {
-        if (!franchiseRepository.existsById(id)) {
+        Collection<Movie> franchiseMovies = findAllMoviesByFranchise(id);
+        if (franchiseMovies == null) {
             throw new FranchiseNotFoundException(id);
+        }
+
+        for (Movie movie : franchiseMovies) {
+            movie.setFranchise(null);
+            movieRepository.save(movie);
         }
 
         franchiseRepository.deleteById(id);
