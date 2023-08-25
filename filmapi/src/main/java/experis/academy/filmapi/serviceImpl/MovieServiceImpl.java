@@ -47,11 +47,30 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie update(Movie movie) {
-        if (!movieRepository.existsById(movie.getId())) {
-            throw new MovieNotFoundException(movie.getId());
+        Movie updatedMovie = movieRepository.findById(movie.getId())
+                .orElseThrow(() -> new MovieCharacterNotFoundException(movie.getId()));
+
+        if (movie.getTitle() != null) {
+            updatedMovie.setTitle(movie.getTitle());
         }
 
-        return movieRepository.save(movie);
+        if (movie.getDirector() != null) {
+            updatedMovie.setDirector(movie.getDirector());
+        }
+
+        if (movie.getGenre() != null) {
+            updatedMovie.setGenre(movie.getGenre());
+        }
+
+        if (movie.getReleaseYear() != 0) {
+            updatedMovie.setReleaseYear(movie.getReleaseYear());
+        }
+
+        if (movie.getTrailerLink() != null) {
+            updatedMovie.setTrailerLink(movie.getTrailerLink());
+        }
+
+        return movieRepository.save(updatedMovie);
     }
 
     @Override
