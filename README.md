@@ -133,8 +133,8 @@ If another port would be desired, this can be set in the application.properties 
 
 
 ## Authors
+Emre Demirel @98emre
 
-Emmre Demirel @98emre
 Nathalie Levenfalk @levenfalk  
 
   
