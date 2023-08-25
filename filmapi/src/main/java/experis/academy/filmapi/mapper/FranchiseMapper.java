@@ -9,11 +9,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import experis.academy.filmapi.model.Franchise;
-import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.franchise.FranchiseDTO;
-import experis.academy.filmapi.model.dto.franchise.FranchisePostDTO;
-import experis.academy.filmapi.model.dto.franchise.FranchiseUpdateDTO;
+import experis.academy.filmapi.model.dtos.franchise.FranchiseDTO;
+import experis.academy.filmapi.model.dtos.franchise.FranchisePostDTO;
+import experis.academy.filmapi.model.dtos.franchise.FranchiseUpdateDTO;
+import experis.academy.filmapi.model.entites.Franchise;
+import experis.academy.filmapi.model.entites.Movie;
 
 @Mapper(componentModel = "spring")
 public abstract class FranchiseMapper {

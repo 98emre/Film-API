@@ -1,4 +1,4 @@
-package experis.academy.filmapi.model;
+package experis.academy.filmapi.model.entites;
 
 import java.util.Set;
 
@@ -46,17 +46,15 @@ public class Movie {
     @Column(name = "trailer_link", length = 1000)
     private String trailerLink;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinTable(name = "movie_character", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
             @JoinColumn(name = "character_id")
     })
 
     private Set<Character> characters;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
-
-
 
 }

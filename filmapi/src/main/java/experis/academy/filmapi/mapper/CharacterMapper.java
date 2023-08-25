@@ -8,11 +8,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.character.CharacterDTO;
-import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
-import experis.academy.filmapi.model.dto.character.CharacterUpdateDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterPostDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterUpdateDTO;
+import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.Movie;
 
 @Mapper(componentModel = "spring")
 public abstract class CharacterMapper {
@@ -26,8 +26,8 @@ public abstract class CharacterMapper {
 
     public abstract Collection<CharacterDTO> charactersToCharactersDTO(Collection<Character> characters);
 
-     public abstract Collection<CharacterPostDTO> charactersToCharactersPostDTO(Collection<Character> characters);
-   
+    public abstract Collection<CharacterPostDTO> charactersToCharactersPostDTO(Collection<Character> characters);
+
     @Named("moviesToIds")
     Set<Integer> map(Set<Movie> source) {
         if (source == null)

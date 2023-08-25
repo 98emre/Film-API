@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import experis.academy.filmapi.exceptions.CharacterNotFoundException;
-import experis.academy.filmapi.model.Character;
+import experis.academy.filmapi.model.entites.Character;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.service.CharacterService;
 

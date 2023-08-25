@@ -1,4 +1,4 @@
-package experis.academy.filmapi.model.dto.movie;
+package experis.academy.filmapi.model.dtos.movie;
 
 import lombok.Data;
 

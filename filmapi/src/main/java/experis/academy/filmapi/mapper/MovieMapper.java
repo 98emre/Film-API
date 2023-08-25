@@ -4,11 +4,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.Movie;
-import experis.academy.filmapi.model.dto.movie.MovieDTO;
-import experis.academy.filmapi.model.dto.movie.MoviePostDTO;
-import experis.academy.filmapi.model.dto.movie.MovieUpdateDTO;
+import experis.academy.filmapi.model.dtos.movie.MovieDTO;
+import experis.academy.filmapi.model.dtos.movie.MoviePostDTO;
+import experis.academy.filmapi.model.dtos.movie.MovieUpdateDTO;
+import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.Movie;
 
 import java.util.Collection;
 import java.util.Set;
@@ -22,6 +22,7 @@ public abstract class MovieMapper {
     public abstract Movie movieUpdateDtoToMovie(MovieUpdateDTO movieUpdateDTO);
 
     public abstract Collection<MovieDTO> moviesToMoviesDto(Collection<Movie> movies);
+
     public abstract Collection<MoviePostDTO> moviesToMoviesPostDto(Collection<Movie> movies);
 
     @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToIds")

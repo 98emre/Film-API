@@ -1,9 +1,12 @@
-package experis.academy.filmapi.model.dto.movie;
+package experis.academy.filmapi.model.dtos.movie;
+
+import java.util.Set;
 
 import lombok.Data;
 
 @Data
-public class MoviePostDTO {
+public class MovieDTO {
+
     private int id;
     private String title;
     private String genre;
@@ -11,4 +14,6 @@ public class MoviePostDTO {
     private String director;
     private String posterPictureURL;
     private String trailerLink;
+    private Integer franchiseId;
+    private Set<Integer> characterIds;
 }
