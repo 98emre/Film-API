@@ -32,10 +32,10 @@ To run Maven in your command line, you need to add Maven bin in your system `PAT
 
 Windows: 
 1. Right click on `This PC` and choose `Properties`.
-2. Click on `Advanced system settings`
+2. Click on `Advanced system settings`.
 3. Click on `Environment Variables`.
 4. Under System Variables, locate `PATH` and click `Edit`.
-5. Click `New` and add the path to Maven's bin
+5. Click `New` and add the path to Maven's bin.
 
 Mac:
 Add the following line to your .bashrc, .bash_profile, or .zshrc, depending on your shell:
