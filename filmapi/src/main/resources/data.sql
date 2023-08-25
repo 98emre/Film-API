@@ -10,7 +10,7 @@ VALUES (2002, 'Chris Columbus', 'Harry Potter and the Chamber of Secrets', 'Adve
 INSERT INTO character (alias, character_name, picture_url, gender) 
 VALUES ('Batman', 'Bruce Wayne','https://upload.wikimedia.org/wikipedia/en/8/8a/Bruce_Wayne_%28Michael_Keaton%29.jpg', 'MALE');
 INSERT INTO character (alias, character_name, picture_url, gender) 
-VALUES ('Joker', 'Jack Oswald White', 'https://www.google.com/search?safe=active&sca_esv=557804163&rlz=1C1GCEU_enSE1065SE1065&sxsrf=AB5stBi7zjoz64LUopLtQnVN-tPjE0YZAw:1692282778568&q=batman+1989&tbm=isch&source=lnms&sa=X&ved=2ahUKEwiyzoDP9OOAAxV0RvEDHQrcBvUQ0pQJegQIDRAB&biw=1718&bih=1313&dpr=1#imgrc=Linko4K3jrTHiM', 'MALE');
+VALUES ('Joker', 'Jack Oswald White', 'https://m.media-amazon.com/images/M/MV5BOTgxMjIyZmMtOTNiMC00YjE3LWJlMWUtZDliZjViMGM3MjM4XkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_.jpg', 'MALE');
 INSERT INTO character (alias, character_name, picture_url, gender) 
 VALUES ('Harry Potter', 'Harry Potter', 'https://i.pinimg.com/originals/cc/e4/08/cce408ade108375ff32c4cae57e386bc.jpg', 'MALE');
 INSERT INTO character (alias, character_name, picture_url, gender) 
