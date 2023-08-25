@@ -13,6 +13,7 @@ import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.repository.MovieCharacterRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieCharacterService;
+import experis.academy.filmapi.utilites.enums.Gender;
 import experis.academy.filmapi.utilites.exceptions.MovieCharacterNotFoundException;
 
 @Service
@@ -50,7 +51,26 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
             throw new MovieCharacterNotFoundException(character.getId());
         }
 
-        return characterRepository.save(character);
+        MovieCharacter updatedMovieCharacter = characterRepository.findById(character.getId())
+                .orElseThrow(() -> new MovieCharacterNotFoundException(character.getId()));
+
+        if (character.getName() != null) {
+            updatedMovieCharacter.setName(character.getName());
+        }
+
+        if (character.getAlias() != null) {
+            updatedMovieCharacter.setAlias(character.getAlias());
+        }
+
+        if (character.getGender() != null) {
+            updatedMovieCharacter.setGender(Gender.valueOf(character.getGender().name().toUpperCase()));
+        }
+
+        if (character.getPictureURL() != null) {
+            updatedMovieCharacter.setPictureURL(character.getPictureURL());
+        }
+
+        return characterRepository.save(updatedMovieCharacter);
     }
 
     @Override
