@@ -1,11 +1,11 @@
 package experis.academy.filmapi.serviceImpl;
 
-import experis.academy.filmapi.repository.CharacterRepository;
+import experis.academy.filmapi.repository.MovieCharacterRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieService;
-import experis.academy.filmapi.utilites.exceptions.CharacterNotFoundException;
+import experis.academy.filmapi.utilites.exceptions.MovieCharacterNotFoundException;
 import experis.academy.filmapi.utilites.exceptions.MovieNotFoundException;
-import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.model.entites.Movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ import java.util.Set;
 public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
-    private final CharacterRepository characterRepository;
+    private final MovieCharacterRepository characterRepository;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository, CharacterRepository characterRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, MovieCharacterRepository characterRepository) {
         this.movieRepository = movieRepository;
         this.characterRepository = characterRepository;
     }
@@ -64,7 +64,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Set<Character> findAllCharactersByMovie(int movieId) {
+    public Set<MovieCharacter> findAllCharactersByMovie(int movieId) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException(movieId));
         return movie.getCharacters();
     }
@@ -72,12 +72,12 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie updateCharacters(int movieId, Set<Integer> charactersId) {
         Movie movie = movieRepository.findById(movieId).orElseThrow(() -> new MovieNotFoundException(movieId));
-        Set<Character> characters = new HashSet<>();
+        Set<MovieCharacter> characters = new HashSet<>();
 
         for (int id : charactersId) {
             if (characterRepository.existsById(id)) {
-                Character character = characterRepository.findById(id)
-                        .orElseThrow(() -> new CharacterNotFoundException(id));
+                MovieCharacter character = characterRepository.findById(id)
+                        .orElseThrow(() -> new MovieCharacterNotFoundException(id));
                 characters.add(character);
             }
         }

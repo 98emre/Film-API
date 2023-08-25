@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.model.entites.Franchise;
 import experis.academy.filmapi.model.entites.Movie;
 import experis.academy.filmapi.repository.FranchiseRepository;
@@ -92,12 +92,12 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public Set<Character> findAllCharactersByFranchise(int franchiseId) {
+    public Set<MovieCharacter> findAllCharactersByFranchise(int franchiseId) {
         if (!franchiseRepository.existsById(franchiseId)) {
             throw new FranchiseNotFoundException(franchiseId);
         }
 
-        Set<Character> characters = new HashSet<>();
+        Set<MovieCharacter> characters = new HashSet<>();
         Set<Movie> movies = findAllMoviesByFranchise(franchiseId);
 
         for (Movie m : movies) {

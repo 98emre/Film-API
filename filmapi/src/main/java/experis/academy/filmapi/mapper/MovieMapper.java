@@ -7,14 +7,14 @@ import org.mapstruct.Named;
 import experis.academy.filmapi.model.dtos.movie.MovieDTO;
 import experis.academy.filmapi.model.dtos.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dtos.movie.MovieUpdateDTO;
-import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.model.entites.Movie;
 
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring", uses = CharacterMapper.class)
+@Mapper(componentModel = "spring", uses = MovieCharacterMapper.class)
 public abstract class MovieMapper {
 
     public abstract Movie moviePostDtoToMovie(MoviePostDTO moviepPostDTO);
@@ -30,7 +30,7 @@ public abstract class MovieMapper {
     public abstract MovieDTO movieToMovieDto(Movie movie);
 
     @Named("charactersToIds")
-    Set<Integer> map(Set<Character> source) {
+    Set<Integer> map(Set<MovieCharacter> source) {
         if (source == null) {
             return null;
         }

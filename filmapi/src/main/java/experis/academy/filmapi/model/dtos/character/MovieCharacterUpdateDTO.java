@@ -4,7 +4,7 @@ import experis.academy.filmapi.utilites.enums.Gender;
 import lombok.Data;
 
 @Data
-public class CharacterUpdateDTO {
+public class MovieCharacterUpdateDTO {
     private int id;
     private String name;
     private String alias;

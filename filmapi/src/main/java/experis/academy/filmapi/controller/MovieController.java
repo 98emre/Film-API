@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.mapper.CharacterMapper;
+import experis.academy.filmapi.mapper.MovieCharacterMapper;
 import experis.academy.filmapi.mapper.MovieMapper;
-import experis.academy.filmapi.model.dtos.character.CharacterPostDTO;
+import experis.academy.filmapi.model.dtos.character.MovieCharacterPostDTO;
 import experis.academy.filmapi.model.dtos.movie.MovieDTO;
 import experis.academy.filmapi.model.dtos.movie.MoviePostDTO;
 import experis.academy.filmapi.model.dtos.movie.MovieUpdateDTO;
-import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.MovieCharacter;
 import experis.academy.filmapi.model.entites.Movie;
 import experis.academy.filmapi.service.MovieService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,10 +26,10 @@ public class MovieController {
 
     private final MovieService movieService;
     private final MovieMapper movieMapper;
-    private final CharacterMapper characterMapper;
+    private final MovieCharacterMapper characterMapper;
 
     @Autowired
-    public MovieController(MovieService movieService, MovieMapper movieMapper, CharacterMapper characterMapper) {
+    public MovieController(MovieService movieService, MovieMapper movieMapper, MovieCharacterMapper characterMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
         this.characterMapper = characterMapper;
@@ -77,8 +77,8 @@ public class MovieController {
     }
 
     @GetMapping("/{id}/characters")
-    public ResponseEntity<Collection<CharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
-        Set<Character> characters = movieService.findAllCharactersByMovie(id);
+    public ResponseEntity<Collection<MovieCharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
+        Set<MovieCharacter> characters = movieService.findAllCharactersByMovie(id);
         if (characters == null) {
             return ResponseEntity.notFound().build();
         }
