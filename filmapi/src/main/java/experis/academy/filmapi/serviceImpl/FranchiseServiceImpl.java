@@ -49,11 +49,19 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise update(Franchise franchise) {
-        if (!franchiseRepository.existsById(franchise.getId())) {
-            throw new FranchiseNotFoundException(franchise.getId());
+
+        Franchise updateFranchise = franchiseRepository.findById(franchise.getId())
+                .orElseThrow(() -> new FranchiseNotFoundException(franchise.getId()));
+
+        if (franchise.getName() != null) {
+            updateFranchise.setName(franchise.getName());
         }
 
-        return franchiseRepository.save(franchise);
+        if (franchise.getDescription() != null) {
+            updateFranchise.setDescription(franchise.getDescription());
+        }
+
+        return franchiseRepository.save(updateFranchise);
     }
 
     @Override

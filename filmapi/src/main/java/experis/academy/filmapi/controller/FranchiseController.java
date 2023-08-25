@@ -29,15 +29,15 @@ public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final MovieMapper movieMapper;
-    private final MovieCharacterMapper characterMapper;
+    private final MovieCharacterMapper movieCharacterMapper;
 
     @Autowired
     public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper,
-            MovieMapper movieMapper, MovieCharacterMapper characterMapper) {
+            MovieMapper movieMapper, MovieCharacterMapper movieCharacterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
         this.movieMapper = movieMapper;
-        this.characterMapper = characterMapper;
+        this.movieCharacterMapper = movieCharacterMapper;
     }
 
     @GetMapping
@@ -94,7 +94,7 @@ public class FranchiseController {
     @GetMapping("/{id}/movies/characters")
     public ResponseEntity<Collection<MovieCharacterPostDTO>> getFranchiseMovieCharacters(@PathVariable Integer id) {
         return ResponseEntity.ok(
-                characterMapper.charactersToCharactersPostDTO(
+                movieCharacterMapper.charactersToCharactersPostDTO(
                         franchiseService.findAllCharactersByFranchise(id)));
     }
 

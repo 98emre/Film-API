@@ -47,10 +47,6 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
 
     @Override
     public MovieCharacter update(MovieCharacter character) {
-        if (!characterRepository.existsById(character.getId())) {
-            throw new MovieCharacterNotFoundException(character.getId());
-        }
-
         MovieCharacter updatedMovieCharacter = characterRepository.findById(character.getId())
                 .orElseThrow(() -> new MovieCharacterNotFoundException(character.getId()));
 
