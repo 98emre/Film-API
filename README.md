@@ -111,7 +111,6 @@ If another port would be desired, this can be set in the application.properties 
 
 ### API Endpoints
 
-#### Movie
 | HTTP Verbs | Endpoints | Action |
 | --------- | --------- | --------- |
 | **Movie** | | |
@@ -140,7 +139,3 @@ If another port would be desired, this can be set in the application.properties 
 Emre Demirel @98emre
 
 Nathalie Levenfalk @levenfalk  
-
-  
-## License
-This project is available for use under the [MIT License](https://choosealicense.com/licenses/mit/) 
