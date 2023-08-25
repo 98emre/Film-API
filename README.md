@@ -6,16 +6,60 @@ Film API is a RESTful API containing a datastore and an interface allowing users
 Picture 1. ER Diagram of the database created with Hibernate
 
   
-## Installation
+## Java Installation Guide
 
-### Prerequisites
+### Step 1: Download Java
+First download latest version of Java [Java](https://www.oracle.com/java/) to install.
 
-- Java 17 or later version and any supporting IDE, suggestively VSCode or IntelliJ
+### Step 2: Verify Installation
+Open a new command prompt (or terminal) and type:
+
+```bash
+java --version
+```
+This should display Java's version, indicating a successful installation.
+
+## Maven Installation Guide
+
+### Step 1: Download Maven
+First download the latest version of Maven [Maven](https://maven.apache.org/download.cgi).
+
+### Step 2: Installed Maven
+Extract the downloaded file to a suitable location on your computer.
+
+### Step 3: Add Maven To Path
+To run Maven in your command line, you need to add Maven bin in your system `PATH` variable.
+
+Windows: 
+1. Right click on `This PC` and choose `Properties`.
+2. Click on `Advanced system settings`
+3. Click on `Environment Variables`.
+4. Under System Variables, locate `PATH` and click `Edit`.
+5. Click `New` and add the path to Maven's bin
+
+Mac:
+Add the following line to your .bashrc, .bash_profile, or .zshrc, depending on your shell:
+```bash
+export PATH=$PATH:/path/to/maven/bin
+```
+Replace /path/to/maven with the actual path where you extracted Maven.
+
+### Step 4: Verify Installation
+Open a new command prompt (or terminal) and type:
+
+```bash
+mvn --version
+```
+
+This should display Maven's version, indicating a successful installation.
+
+
+## Database
+
 - A relational database management system (RDBMS) supporting SQL, suggestively PostgreSQL
-- Maven version 3.8.1 or later
 
 
-### Configuration
+## Configuration
 
 To clone this application run the following command in your terminal:
 ```bash
@@ -23,7 +67,7 @@ git clone https://github.com/98emre/Film-API
 ```
 
 
-#### Dependencies in your application.properties file
+### Dependencies in your application.properties file
 
 Make sure all you have all of the following dependencies in your pom.xml file and use the latest version:
 - spring-boot-starter
@@ -99,9 +143,9 @@ If another port would be desired, this can be set in the application.properties 
 | DELETE | /api/franchises/delete/:franchiseId | To delete a single franchise |
 
 ## Authors
-  
-@levenfalk  
-@98emre
+Emre Demirel @98emre
+
+Nathalie Levenfalk @levenfalk  
 
   
 ## License
