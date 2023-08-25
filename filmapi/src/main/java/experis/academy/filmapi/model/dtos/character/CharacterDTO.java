@@ -2,7 +2,7 @@ package experis.academy.filmapi.model.dtos.character;
 
 import java.util.Set;
 
-import experis.academy.filmapi.model.Gender;
+import experis.academy.filmapi.utilites.enums.Gender;
 import lombok.Data;
 
 @Data

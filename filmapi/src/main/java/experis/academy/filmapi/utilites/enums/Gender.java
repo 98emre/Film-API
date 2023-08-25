@@ -1,4 +1,4 @@
-package experis.academy.filmapi.model;
+package experis.academy.filmapi.utilites.enums;
 
 public enum Gender {
     MALE, FEMALE, OTHER

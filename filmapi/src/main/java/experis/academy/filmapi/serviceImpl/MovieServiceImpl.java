@@ -3,8 +3,8 @@ package experis.academy.filmapi.serviceImpl;
 import experis.academy.filmapi.repository.CharacterRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.MovieService;
-import experis.academy.filmapi.exceptions.CharacterNotFoundException;
-import experis.academy.filmapi.exceptions.MovieNotFoundException;
+import experis.academy.filmapi.utilites.exceptions.CharacterNotFoundException;
+import experis.academy.filmapi.utilites.exceptions.MovieNotFoundException;
 import experis.academy.filmapi.model.entites.Character;
 import experis.academy.filmapi.model.entites.Movie;
 

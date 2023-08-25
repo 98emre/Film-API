@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import experis.academy.filmapi.exceptions.FranchiseNotFoundException;
-import experis.academy.filmapi.exceptions.MovieNotFoundException;
 import experis.academy.filmapi.model.entites.Character;
 import experis.academy.filmapi.model.entites.Franchise;
 import experis.academy.filmapi.model.entites.Movie;
 import experis.academy.filmapi.repository.FranchiseRepository;
 import experis.academy.filmapi.repository.MovieRepository;
 import experis.academy.filmapi.service.FranchiseService;
+import experis.academy.filmapi.utilites.exceptions.FranchiseNotFoundException;
+import experis.academy.filmapi.utilites.exceptions.MovieNotFoundException;
 
 @Service
 public class FranchiseServiceImpl implements FranchiseService {

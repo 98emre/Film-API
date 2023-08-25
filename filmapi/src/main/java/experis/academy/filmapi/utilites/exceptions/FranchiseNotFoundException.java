@@ -1,4 +1,4 @@
-package experis.academy.filmapi.exceptions;
+package experis.academy.filmapi.utilites.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
