@@ -122,10 +122,9 @@ If another port would be desired, this can be set in the application.properties 
 | DELETE | /api/movies/delete/:movieId | To delete a single movie |
 
 #### Character
-| Character |
+| Character | | |
 | --------- | --------- | --------- |
 | HTTP Verbs | Endpoints | Action |
-| --------- | --------- | --------- |
 | POST | /api/characters/add | To create a new character |
 | GET | /api/characters | To retrieve all characters on the platform |
 | GET | /api/characters/:characterId | To retrieve details of a single character |
