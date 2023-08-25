@@ -69,10 +69,17 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/update/characters")
-    public ResponseEntity<Void> updateMovieCharacters(@PathVariable Integer id,
+    @PutMapping("/{id}/add/characters")
+    public ResponseEntity<Void> addMovieCharacters(@PathVariable Integer id,
             @RequestBody Set<Integer> charactersId) {
-        movieService.updateCharacters(id, charactersId);
+        movieService.addCharacters(id, charactersId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/remove/characters")
+    public ResponseEntity<Void> removeMovieCharacters(@PathVariable Integer id,
+            @RequestBody Set<Integer> charactersId) {
+        movieService.removeCharacters(id, charactersId);
         return ResponseEntity.noContent().build();
     }
 
@@ -83,6 +90,5 @@ public class MovieController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(characterMapper.charactersToCharactersPostDTO(characters));
-
     }
 }
