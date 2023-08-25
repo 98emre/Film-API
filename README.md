@@ -113,7 +113,7 @@ If another port would be desired, this can be set in the application.properties 
 
 #### Movie
 | HTTP Verbs | Endpoints | Action |
-| --- | --- | --- |
+| --------- | --------- | --------- |
 | POST | /api/movies/add | To create a new movie |
 | GET | /api/movies | To retrieve all movies on the platform |
 | GET | /api/movies/:movieId | To retrieve details of a single movie |
@@ -123,7 +123,7 @@ If another port would be desired, this can be set in the application.properties 
 
 #### Character
 | HTTP Verbs | Endpoints | Action |
-| --- | --- | --- |
+| --------- | --------- | --------- |
 | POST | /api/characters/add | To create a new character |
 | GET | /api/characters | To retrieve all characters on the platform |
 | GET | /api/characters/:characterId | To retrieve details of a single character |
@@ -133,7 +133,7 @@ If another port would be desired, this can be set in the application.properties 
 
 #### Franchise
 | HTTP Verbs | Endpoints | Action |
-| --- | --- | --- |
+| --------- | --------- | --------- |
 | POST | /api/franchises/add | To create a new franchise |
 | GET | /api/franchises | To retrieve all franchises on the platform |
 | GET | /api/franchises/:franchiseId | To retrieve details of a single franchise |
