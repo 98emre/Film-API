@@ -108,7 +108,7 @@ spring.jpa.hibernate.ddl-auto=update
 The application will run on port 8080 by default. 
 If another port would be desired, this can be set in the application.properties file.
 
-You can use Swagger for testing the API [Swagger URL](http://localhost:8080/swagger-ui/index.html#/)
+When the application is running you can use Swagger for testing the API [Swagger URL](http://localhost:8080/swagger-ui/index.html#/)
 
 ### API Endpoints
 
