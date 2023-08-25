@@ -29,6 +29,14 @@ public class MovieCharacterController {
         this.characterMapper = characterMapper;
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<Void> addCharacter(@RequestBody MovieCharacterPostDTO characterPostDTO) {
+        MovieCharacter character = characterService.add(characterMapper.characterPostToCharacter(characterPostDTO));
+        URI location = URI.create("characters/" + character.getId());
+
+        return ResponseEntity.created(location).build();
+    }
+
     @GetMapping
     public ResponseEntity<Collection<MovieCharacterDTO>> getAll() {
         return ResponseEntity.ok(characterMapper.charactersToCharactersDTO(characterService.findAll()));
@@ -37,14 +45,6 @@ public class MovieCharacterController {
     @GetMapping("/{id}")
     public ResponseEntity<MovieCharacterDTO> getCharacter(@PathVariable Integer id) {
         return ResponseEntity.ok(characterMapper.characterToCharacterDTO(characterService.findById(id)));
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<Void> addCharacter(@RequestBody MovieCharacterPostDTO characterPostDTO) {
-        MovieCharacter character = characterService.add(characterMapper.characterPostToCharacter(characterPostDTO));
-        URI location = URI.create("characters/" + character.getId());
-
-        return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}/update")

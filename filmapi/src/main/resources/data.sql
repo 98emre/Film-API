@@ -12,9 +12,9 @@ VALUES ('Batman', 'Bruce Wayne','https://upload.wikimedia.org/wikipedia/en/8/8a/
 INSERT INTO character (alias, character_name, picture_url, gender) 
 VALUES ('Joker', 'Jack Oswald White', 'https://m.media-amazon.com/images/M/MV5BOTgxMjIyZmMtOTNiMC00YjE3LWJlMWUtZDliZjViMGM3MjM4XkEyXkFqcGdeQXVyMDc2NTEzMw@@._V1_.jpg', 'MALE');
 INSERT INTO character (alias, character_name, picture_url, gender) 
-VALUES ('Harry Potter', 'Harry Potter', 'https://i.pinimg.com/originals/cc/e4/08/cce408ade108375ff32c4cae57e386bc.jpg', 'MALE');
+VALUES (NULL, 'Harry Potter', 'https://i.pinimg.com/originals/cc/e4/08/cce408ade108375ff32c4cae57e386bc.jpg', 'MALE');
 INSERT INTO character (alias, character_name, picture_url, gender) 
-VALUES ('Hermione', 'Hermione Granger', 'https://i.insider.com/60772a1742061500181757bc?width=1000&format=jpeg&auto=webp', 'FEMALE');
+VALUES (NULL, 'Hermione Granger', 'https://i.insider.com/60772a1742061500181757bc?width=1000&format=jpeg&auto=webp', 'FEMALE');
 
 -- Franchises
 INSERT INTO franchise (name, description) 

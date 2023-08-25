@@ -34,6 +34,15 @@ public class MovieController {
         this.movieMapper = movieMapper;
         this.characterMapper = characterMapper;
     }
+    
+    @PostMapping("/add")
+    public ResponseEntity<Void> addMovie(@RequestBody MoviePostDTO moviePostDTO) {
+        Movie movie = movieService.add(movieMapper.moviePostDtoToMovie(moviePostDTO));
+
+        URI location = URI.create("movie/" + movie.getId());
+
+        return ResponseEntity.created(location).build();
+    }
 
     @GetMapping
     public ResponseEntity<Collection<MovieDTO>> getAll() {
@@ -45,13 +54,13 @@ public class MovieController {
         return ResponseEntity.ok(movieMapper.movieToMovieDto(movieService.findById(id)));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addMovie(@RequestBody MoviePostDTO moviePostDTO) {
-        Movie movie = movieService.add(movieMapper.moviePostDtoToMovie(moviePostDTO));
-
-        URI location = URI.create("movie/" + movie.getId());
-
-        return ResponseEntity.created(location).build();
+    @GetMapping("/{id}/characters")
+    public ResponseEntity<Collection<MovieCharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
+        Set<MovieCharacter> characters = movieService.findAllCharactersByMovie(id);
+        if (characters == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(characterMapper.charactersToCharactersPostDTO(characters));
     }
 
     @PutMapping("/{id}/update")
@@ -63,12 +72,6 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Integer id) {
-        movieService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @PutMapping("/{id}/update/characters")
     public ResponseEntity<Void> updateMovieCharacters(@PathVariable Integer id,
             @RequestBody Set<Integer> charactersId) {
@@ -76,13 +79,11 @@ public class MovieController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/characters")
-    public ResponseEntity<Collection<MovieCharacterPostDTO>> getMovieCharacters(@PathVariable Integer id) {
-        Set<MovieCharacter> characters = movieService.findAllCharactersByMovie(id);
-        if (characters == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(characterMapper.charactersToCharactersPostDTO(characters));
-
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Void> deleteMovie(@PathVariable Integer id) {
+        movieService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
+
 }
