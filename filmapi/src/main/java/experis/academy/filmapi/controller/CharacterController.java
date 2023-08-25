@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import experis.academy.filmapi.mapper.CharacterMapper;
-import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.dto.character.CharacterDTO;
-import experis.academy.filmapi.model.dto.character.CharacterPostDTO;
-import experis.academy.filmapi.model.dto.character.CharacterUpdateDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterPostDTO;
+import experis.academy.filmapi.model.dtos.character.CharacterUpdateDTO;
+import experis.academy.filmapi.model.entites.Character;
 import experis.academy.filmapi.service.CharacterService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 

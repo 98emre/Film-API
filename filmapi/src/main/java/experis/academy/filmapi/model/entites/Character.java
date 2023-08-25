@@ -1,7 +1,8 @@
-package experis.academy.filmapi.model;
+package experis.academy.filmapi.model.entites;
 
 import java.util.Set;
 
+import experis.academy.filmapi.model.Gender;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,6 +41,5 @@ public class Character {
 
     @ManyToMany(mappedBy = "characters", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Movie> movies;
-
 
 }

@@ -1,4 +1,4 @@
-package experis.academy.filmapi.model.dto.character;
+package experis.academy.filmapi.model.dtos.character;
 
 import java.util.Set;
 

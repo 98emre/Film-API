@@ -1,4 +1,4 @@
-package experis.academy.filmapi.model;
+package experis.academy.filmapi.model.entites;
 
 import java.util.Set;
 
@@ -33,5 +33,4 @@ public class Franchise {
     @OneToMany(mappedBy = "franchise", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private Set<Movie> movies;
 
-    
 }

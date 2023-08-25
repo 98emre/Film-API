@@ -2,9 +2,9 @@ package experis.academy.filmapi.service;
 
 import java.util.Set;
 
-import experis.academy.filmapi.model.Character;
-import experis.academy.filmapi.model.Franchise;
-import experis.academy.filmapi.model.Movie;
+import experis.academy.filmapi.model.entites.Character;
+import experis.academy.filmapi.model.entites.Franchise;
+import experis.academy.filmapi.model.entites.Movie;
 
 public interface FranchiseService extends CrudService<Franchise, Integer> {
 
