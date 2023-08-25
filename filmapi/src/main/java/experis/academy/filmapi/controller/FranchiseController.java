@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import experis.academy.filmapi.mapper.CharacterMapper;
+import experis.academy.filmapi.mapper.MovieCharacterMapper;
 import experis.academy.filmapi.mapper.FranchiseMapper;
 import experis.academy.filmapi.mapper.MovieMapper;
-import experis.academy.filmapi.model.dtos.character.CharacterPostDTO;
+import experis.academy.filmapi.model.dtos.character.MovieCharacterPostDTO;
 import experis.academy.filmapi.model.dtos.franchise.FranchiseDTO;
 import experis.academy.filmapi.model.dtos.franchise.FranchisePostDTO;
 import experis.academy.filmapi.model.dtos.franchise.FranchiseUpdateDTO;
@@ -29,11 +29,11 @@ public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final MovieMapper movieMapper;
-    private final CharacterMapper characterMapper;
+    private final MovieCharacterMapper characterMapper;
 
     @Autowired
     public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper,
-            MovieMapper movieMapper, CharacterMapper characterMapper) {
+            MovieMapper movieMapper, MovieCharacterMapper characterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
         this.movieMapper = movieMapper;
@@ -92,7 +92,7 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}/movies/characters")
-    public ResponseEntity<Collection<CharacterPostDTO>> getFranchiseMovieCharacters(@PathVariable Integer id) {
+    public ResponseEntity<Collection<MovieCharacterPostDTO>> getFranchiseMovieCharacters(@PathVariable Integer id) {
         return ResponseEntity.ok(
                 characterMapper.charactersToCharactersPostDTO(
                         franchiseService.findAllCharactersByFranchise(id)));
