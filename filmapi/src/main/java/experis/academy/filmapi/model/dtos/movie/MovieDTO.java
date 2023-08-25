@@ -1,7 +1,6 @@
 package experis.academy.filmapi.model.dtos.movie;
 
 import java.util.Set;
-
 import lombok.Data;
 
 @Data
